@@ -10,23 +10,27 @@ public class UIManager : MonoBehaviour
     public bool showGUI = true;
 
     private NetworkManager m_NetworkManager;
+    private PlayerInfo m_PlayerInfo;
 
     [Header("Main Menu")] [SerializeField] private GameObject mainMenu;
     [SerializeField] private Button buttonHost;
     [SerializeField] private Button buttonClient;
     [SerializeField] private Button buttonServer;
     [SerializeField] private InputField inputFieldIP;
+    [SerializeField] public InputField insertName;
 
-    [Header("In-Game HUD")] [SerializeField]
+    [Header("In-Game HUD")]
+    [SerializeField]
     private GameObject inGameHUD;
 
     [SerializeField] private Text textSpeed;
     [SerializeField] private Text textLaps;
-    [SerializeField] private Text textPosition;
+    [SerializeField] public Text textPosition;
 
     private void Awake()
     {
         m_NetworkManager = FindObjectOfType<NetworkManager>();
+        m_PlayerInfo = FindObjectOfType<PlayerInfo>();
     }
 
     private void Start()
@@ -64,6 +68,9 @@ public class UIManager : MonoBehaviour
     {
         m_NetworkManager.StartClient();
         m_NetworkManager.networkAddress = inputFieldIP.text;
+
+        m_PlayerInfo.Name = insertName.text;
+
         ActivateInGameHUD();
     }
 

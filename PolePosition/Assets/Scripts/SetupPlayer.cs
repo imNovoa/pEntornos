@@ -40,7 +40,7 @@ public class SetupPlayer : NetworkBehaviour
     {
         base.OnStartClient();
         m_PlayerInfo.ID = m_ID;
-        m_PlayerInfo.Name = "Player" + m_ID;
+        m_PlayerInfo.Name = m_UIManager.insertName.text + m_ID;
         m_PlayerInfo.CurrentLap = 0;
         m_PolePositionManager.AddPlayer(m_PlayerInfo);
     }
@@ -77,7 +77,7 @@ public class SetupPlayer : NetworkBehaviour
 
     void OnSpeedChangeEventHandler(float speed)
     {
-        m_UIManager.UpdateSpeed((int) speed * 5); // 5 for visualization purpose (km/h)
+        m_UIManager.UpdateSpeed((int)speed * 5); // 5 for visualization purpose (km/h)
     }
 
     void ConfigureCamera()
