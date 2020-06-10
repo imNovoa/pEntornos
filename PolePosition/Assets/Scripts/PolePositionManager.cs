@@ -32,12 +32,16 @@ public class PolePositionManager : NetworkBehaviour
         if (m_Players.Count == 0)
             return;
 
-        UpdateRaceProgress();
+        if (numPlayers >= 2)
+        {
+            UpdateRaceProgress();
+        }
     }
 
     public void AddPlayer(PlayerInfo player)
     {
         m_Players.Add(player);
+        numPlayers++;
     }
 
     private class PlayerInfoComparer : Comparer<PlayerInfo>

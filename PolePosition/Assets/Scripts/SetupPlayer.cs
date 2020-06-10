@@ -39,10 +39,9 @@ public class SetupPlayer : NetworkBehaviour
     public override void OnStartClient()
     {
         base.OnStartClient();
-        m_PlayerInfo.ID = m_ID;
-        m_PlayerInfo.Name = m_UIManager.insertName.text + m_ID;
+        m_PlayerInfo.ID = m_ID;        
         m_PlayerInfo.CurrentLap = 0;
-        m_PolePositionManager.AddPlayer(m_PlayerInfo);
+        m_PolePositionManager.AddPlayer(m_PlayerInfo);  
     }
 
     /// <summary>
@@ -51,6 +50,23 @@ public class SetupPlayer : NetworkBehaviour
     /// </summary>
     public override void OnStartLocalPlayer()
     {
+        m_PlayerInfo.Name = m_UIManager.insertName.text;
+        CmdProvideName(m_PlayerInfo.Name);
+    }
+
+    [Command]
+    void CmdProvideName(string name)
+    {
+        m_PlayerInfo.Name = name;
+        
+        // Broadcast to all clients
+        RpcPlayerName(name);
+    }
+
+    [ClientRpc]
+    void RpcPlayerName(string name)
+    {
+        m_UIManager.textPosition.text += name + "\n";
     }
 
     #endregion

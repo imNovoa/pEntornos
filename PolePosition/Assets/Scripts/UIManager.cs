@@ -10,7 +10,6 @@ public class UIManager : MonoBehaviour
     public bool showGUI = true;
 
     private NetworkManager m_NetworkManager;
-    private PlayerInfo m_PlayerInfo;
 
     [Header("Main Menu")] [SerializeField] private GameObject mainMenu;
     [SerializeField] private Button buttonHost;
@@ -30,7 +29,6 @@ public class UIManager : MonoBehaviour
     private void Awake()
     {
         m_NetworkManager = FindObjectOfType<NetworkManager>();
-        m_PlayerInfo = FindObjectOfType<PlayerInfo>();
     }
 
     private void Start()
@@ -68,8 +66,6 @@ public class UIManager : MonoBehaviour
     {
         m_NetworkManager.StartClient();
         m_NetworkManager.networkAddress = inputFieldIP.text;
-
-        m_PlayerInfo.Name = insertName.text;
 
         ActivateInGameHUD();
     }
