@@ -12,6 +12,14 @@ public class SetupPlayer : NetworkBehaviour
 {
     [SyncVar] private int m_ID;
     [SyncVar] private string m_Name;
+    [SyncVar] private int m_Color;
+
+    public Color COLOR_RED = new Color(0.8F, 0.1F, 0.1F);
+    public Color COLOR_GREEN = new Color(0.1F, 0.8F, 0.1F);
+    public Color COLOR_BLUE = new Color(0.1F, 0.1F, 0.8F);
+    public Color COLOR_BLACK = new Color(0.1F, 0.1F, 0.1F);
+    public Color COLOR_ORANGE = new Color(0.7F, 0.3F, 0.2F);
+    public Color COLOR_WHITE = new Color(0.8F, 0.8F, 0.8F);
 
     private UIManager m_UIManager;
     private NetworkManager m_NetworkManager;
@@ -29,8 +37,7 @@ public class SetupPlayer : NetworkBehaviour
     public override void OnStartServer()
     {
         base.OnStartServer();
-        m_ID = connectionToClient.connectionId;
-        
+        m_ID = connectionToClient.connectionId;        
     }
 
     /// <summary>
@@ -43,6 +50,7 @@ public class SetupPlayer : NetworkBehaviour
         m_PlayerInfo.ID = m_ID;
         m_PlayerInfo.CurrentLap = 0;
         m_PlayerInfo.Name = m_Name;
+        m_PlayerInfo.Color = m_Color;
         m_PolePositionManager.AddPlayer(m_PlayerInfo);
 
     }
@@ -54,6 +62,7 @@ public class SetupPlayer : NetworkBehaviour
     public override void OnStartLocalPlayer()
     {
         CmdProvideName(m_UIManager.insertName.text);
+        CmdProvideColor(m_UIManager.InputColor.value);
     }
 
     [Command]
@@ -62,6 +71,15 @@ public class SetupPlayer : NetworkBehaviour
         m_Name = name;
         RpcPlayerName(name);
         
+    }
+
+    [Command]
+    void CmdProvideColor(int colorId)
+    {
+
+        m_Color = colorId;
+        RpcPlayerColor(colorId);
+
     }
 
     [Command]
@@ -76,6 +94,35 @@ public class SetupPlayer : NetworkBehaviour
         m_PlayerInfo.Name = name;
         m_UIManager.textPosition.text += name + "\n";
         CmdUpdateUI();
+    }
+
+    [ClientRpc]
+    void RpcPlayerColor(int colorId)
+    {
+        m_PlayerInfo.Color = colorId;
+        switch (colorId)
+        {
+            case 0:
+                GetComponentInChildren<Renderer>().materials[1].color = COLOR_RED;
+                break;
+            case 1:
+                GetComponentInChildren<Renderer>().materials[1].color = COLOR_GREEN;
+                break;
+            case 2:
+                GetComponentInChildren<Renderer>().materials[1].color = COLOR_BLUE;
+                break;
+            case 3:
+                GetComponentInChildren<Renderer>().materials[1].color = COLOR_BLACK;
+                break;
+            case 4:
+                GetComponentInChildren<Renderer>().materials[1].color = COLOR_ORANGE;
+                break;
+            case 5:
+                GetComponentInChildren<Renderer>().materials[1].color = COLOR_WHITE;
+                break;
+            default:
+                break;
+        }
     }
 
     [ClientRpc]

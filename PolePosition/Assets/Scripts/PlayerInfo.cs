@@ -8,6 +8,8 @@ public class PlayerInfo : MonoBehaviour
     public string Name { get; set; }
 
     public int ID { get; set; }
+    
+    public int Color { get; set; }
 
     public int CurrentPosition { get; set; }
 

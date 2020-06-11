@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Button buttonServer;
     [SerializeField] private InputField inputFieldIP;
     [SerializeField] public InputField insertName;
+    [SerializeField] public Dropdown InputColor;
 
     [Header("In-Game HUD")]
     [SerializeField]
