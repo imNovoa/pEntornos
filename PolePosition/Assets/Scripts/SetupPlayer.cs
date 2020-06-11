@@ -30,6 +30,7 @@ public class SetupPlayer : NetworkBehaviour
     {
         base.OnStartServer();
         m_ID = connectionToClient.connectionId;
+        
     }
 
     /// <summary>
@@ -39,9 +40,11 @@ public class SetupPlayer : NetworkBehaviour
     public override void OnStartClient()
     {
         base.OnStartClient();
-        m_PlayerInfo.ID = m_ID;        
+        m_PlayerInfo.ID = m_ID;
         m_PlayerInfo.CurrentLap = 0;
-        m_PolePositionManager.AddPlayer(m_PlayerInfo);  
+        m_PlayerInfo.Name = m_Name;
+        m_PolePositionManager.AddPlayer(m_PlayerInfo);
+
     }
 
     /// <summary>
@@ -50,23 +53,35 @@ public class SetupPlayer : NetworkBehaviour
     /// </summary>
     public override void OnStartLocalPlayer()
     {
-        m_PlayerInfo.Name = m_UIManager.insertName.text;
-        CmdProvideName(m_PlayerInfo.Name);
+        CmdProvideName(m_UIManager.insertName.text);
     }
 
     [Command]
-    void CmdProvideName(string name)
+    void CmdProvideName(String name)
     {
-        m_PlayerInfo.Name = name;
-        
-        // Broadcast to all clients
+        m_Name = name;
         RpcPlayerName(name);
+        
+    }
+
+    [Command]
+    void CmdUpdateUI()
+    {
+        RpcUpdateUI(m_UIManager.textPosition.text);
     }
 
     [ClientRpc]
     void RpcPlayerName(string name)
-    {
+    {        
+        m_PlayerInfo.Name = name;
         m_UIManager.textPosition.text += name + "\n";
+        CmdUpdateUI();
+    }
+
+    [ClientRpc]
+    void RpcUpdateUI(string UIcontent)
+    {
+        m_UIManager.textPosition.text = UIcontent;
     }
 
     #endregion
@@ -90,6 +105,7 @@ public class SetupPlayer : NetworkBehaviour
             ConfigureCamera();
         }
     }
+
 
     void OnSpeedChangeEventHandler(float speed)
     {

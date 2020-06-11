@@ -32,10 +32,7 @@ public class PolePositionManager : NetworkBehaviour
         if (m_Players.Count == 0)
             return;
 
-        if (numPlayers >= 2)
-        {
-            UpdateRaceProgress();
-        }
+        UpdateRaceProgress();
     }
 
     public void AddPlayer(PlayerInfo player)
@@ -76,7 +73,7 @@ public class PolePositionManager : NetworkBehaviour
         string myRaceOrder = "";
         foreach (var _player in m_Players)
         {
-            myRaceOrder += _player.Name + " ";
+            myRaceOrder += _player.Name + " " + _player.ID + " ";
         }
 
         Debug.Log("El orden de carrera es: " + myRaceOrder);
