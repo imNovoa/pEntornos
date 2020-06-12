@@ -63,10 +63,13 @@ public class PlayerController : NetworkBehaviour
 
     public void Update()
     {
-        InputAcceleration = Input.GetAxis("Vertical");
-        InputSteering = Input.GetAxis(("Horizontal"));
-        InputBrake = Input.GetAxis("Jump");
-        Speed = m_Rigidbody.velocity.magnitude;
+        if (m_PlayerInfo.StartCar)
+        {
+            InputAcceleration = Input.GetAxis("Vertical");
+            InputSteering = Input.GetAxis(("Horizontal"));
+            InputBrake = Input.GetAxis("Jump");
+            Speed = m_Rigidbody.velocity.magnitude;
+        }
     }
 
     public void FixedUpdate()

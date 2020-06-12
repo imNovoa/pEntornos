@@ -50,6 +50,7 @@ public class SetupPlayer : NetworkBehaviour
         m_PlayerInfo.ID = m_ID;
         m_PlayerInfo.CurrentLap = 0;
         m_PlayerInfo.Name = m_Name;
+        m_PlayerInfo.StartCar = false;
         m_PlayerInfo.Color = m_Color;
         m_PolePositionManager.AddPlayer(m_PlayerInfo);
 
@@ -63,8 +64,12 @@ public class SetupPlayer : NetworkBehaviour
     {
         CmdProvideName(m_UIManager.insertName.text);
         CmdProvideColor(m_UIManager.InputColor.value);
+        if(m_PolePositionManager.numPlayers == 2)
+        {
+            RpcCanStartCar();
+        }
     }
-
+    
     [Command]
     void CmdProvideName(String name)
     {
@@ -130,7 +135,11 @@ public class SetupPlayer : NetworkBehaviour
     {
         m_UIManager.textPosition.text = UIcontent;
     }
-
+    [ClientRpc]
+    void RpcCanStartCar()
+    {
+        m_PlayerInfo.StartCar = true;
+    }
     #endregion
 
     private void Awake()
