@@ -40,7 +40,13 @@ public class PolePositionManager : NetworkBehaviour
         m_Players.Add(player);
         numPlayers++;
     }
-
+    public void AllStartTrue()
+    {
+        foreach (var item in m_Players)
+        {
+            item.StartCar = true;
+        }
+    }
     private class PlayerInfoComparer : Comparer<PlayerInfo>
     {
         float[] m_ArcLengths;

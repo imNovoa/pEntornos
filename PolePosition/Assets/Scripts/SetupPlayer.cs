@@ -64,12 +64,16 @@ public class SetupPlayer : NetworkBehaviour
     {
         CmdProvideName(m_UIManager.insertName.text);
         CmdProvideColor(m_UIManager.InputColor.value);
-        if(m_PolePositionManager.numPlayers == 2)
+        if(m_PolePositionManager.numPlayers > 2)
         {
-            RpcCanStartCar();
+            CmdCanStartCar();
         }
     }
-    
+    [Command]
+    void CmdCanStartCar()
+    {
+        RpcCanStartCar();
+    }
     [Command]
     void CmdProvideName(String name)
     {
@@ -137,8 +141,14 @@ public class SetupPlayer : NetworkBehaviour
     }
     [ClientRpc]
     void RpcCanStartCar()
-    {
-        m_PlayerInfo.StartCar = true;
+    {/*
+        foreach (var item in m_PolePositionManager.m_Players)
+        {
+            item.StartCar = true;
+        }*/
+        //m_PlayerInfo.StartCar = true;
+        //m_PlayerController.enabled = true;
+        m_PolePositionManager.AllStartTrue();
     }
     #endregion
 
