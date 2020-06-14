@@ -141,13 +141,7 @@ public class SetupPlayer : NetworkBehaviour
     }
     [ClientRpc]
     void RpcCanStartCar()
-    {/*
-        foreach (var item in m_PolePositionManager.m_Players)
-        {
-            item.StartCar = true;
-        }*/
-        //m_PlayerInfo.StartCar = true;
-        //m_PlayerController.enabled = true;
+    {
         m_PolePositionManager.AllStartTrue();
     }
     #endregion
