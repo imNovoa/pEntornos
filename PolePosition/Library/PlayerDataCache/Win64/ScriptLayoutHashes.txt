@@ -1,12 +1,12 @@
 Win64
 PlayerPath?
-C:/Users/Ivan/Desktop/Nueva carpeta/pEntornos/PolePosition/Build/RacingProto.exe
+C:/Users/rpt09/Documents/GitHub/pEntornos/PolePosition/RacingProto.exe
 SceneListBegin?
 Assets/_Scenes/Game.unity
 SceneListEnd?
 93f098e80aa5266dce8b55ec7e58543d Mirror.dll:Mirror.TelepathyTransport
 3c08375166df118bd1801438fc36b92f Unity.TextMeshPro.dll:TMPro.TMP_SelectionCaret
-6a6f5ac7b0e7dc266a58f1d991d2608c Assembly-CSharp.dll:.SetupPlayer
+6fd2bb55b3ee5edb6040a1c5bccd0e07 Assembly-CSharp.dll:.SetupPlayer
 77c21079ace8d76ce6e941d3dabbfe6e Unity.TextMeshPro.dll:TMPro.TMP_Dropdown
 4e55399bb1b81f08ab790913f62fbbac Mirror.dll:Mirror.NetworkManagerHUD
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
@@ -106,7 +106,7 @@ e1bbf0ab858085e38fae6b12ebbdcd35 UnityEngine.Timeline.dll:UnityEngine.Timeline.C
 e1bbf0ab858085e38fae6b12ebbdcd35 UnityEngine.Timeline.dll:UnityEngine.Timeline.GroupTrack
 e1bbf0ab858085e38fae6b12ebbdcd35 UnityEngine.Timeline.dll:UnityEngine.Timeline.PlayableTrack
 201e3fde670b00545944bb3db215c80a UnityEngine.Timeline.dll:UnityEngine.Timeline.TimelineAsset
-f92a2a04e931ca67091f9eacd84d43d4 Assembly-CSharp.dll:.UIManager
+939470c5792e370ec3ed12a33e253502 Assembly-CSharp.dll:.UIManager
 0ff99d510934a09ffb11115e10289020 Mirror.dll:Mirror.Websocket.WebsocketTransport
 4e9333594897a1fb8b136ad2eae996c7 Unity.TextMeshPro.dll:TMPro.TMP_SubMeshUI
 e6ae40841db498b6e673877ac45ad208 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
