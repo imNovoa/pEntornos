@@ -19,6 +19,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] public InputField insertName;
     [SerializeField] public Dropdown InputColor;
 
+    [Header("Lobby Room")] [SerializeField] private GameObject lobbyRoom;
+    [SerializeField] private Button buttonReady;
+    [SerializeField] private Button buttonReturn;
+    [SerializeField] private Text playersReady;
+
     [Header("In-Game HUD")]
     [SerializeField]
     private GameObject inGameHUD;
@@ -45,35 +50,78 @@ public class UIManager : MonoBehaviour
         textSpeed.text = "Speed " + speed + " Km/h";
     }
 
+    public void UpdatePlayers(int players)
+    {
+        playersReady.text = "Players connected: " + players;
+    }
+
     private void ActivateMainMenu()
     {
         mainMenu.SetActive(true);
         inGameHUD.SetActive(false);
+        lobbyRoom.SetActive(false);
+    }
+
+    private void ReturnToMenu()
+    {
+        buttonReady.onClick.RemoveListener(() => ActivateInGameHUD());
+        mainMenu.SetActive(true);
+        inGameHUD.SetActive(false);
+        lobbyRoom.SetActive(false);
+    }
+    
+    private void ActivateLobbyRoomHost()
+    {
+        buttonReady.onClick.AddListener(() => ActivateInGameHUD());
+        buttonReady.onClick.AddListener(() => m_NetworkManager.StartHost());
+        buttonReturn.onClick.AddListener(() => ReturnToMenu());
+        mainMenu.SetActive(false);
+        inGameHUD.SetActive(false);
+        lobbyRoom.SetActive(true);
+    }
+
+    private void ActivateLobbyRoomClient()
+    {
+        buttonReady.onClick.AddListener(() => ActivateInGameHUD());
+        buttonReady.onClick.AddListener(() => m_NetworkManager.StartClient());
+        buttonReturn.onClick.AddListener(() => ReturnToMenu());
+        mainMenu.SetActive(false);
+        inGameHUD.SetActive(false);
+        lobbyRoom.SetActive(true);
+    }
+
+    private void ActivateLobbyRoomServer()
+    {
+        buttonReady.onClick.AddListener(() => ActivateInGameHUD());
+        buttonReady.onClick.AddListener(() => m_NetworkManager.StartServer());
+        buttonReturn.onClick.AddListener(() => ReturnToMenu());
+        mainMenu.SetActive(false);
+        inGameHUD.SetActive(false);
+        lobbyRoom.SetActive(true);
     }
 
     private void ActivateInGameHUD()
     {
         mainMenu.SetActive(false);
+        lobbyRoom.SetActive(false);
         inGameHUD.SetActive(true);
     }
 
     private void StartHost()
     {
-        m_NetworkManager.StartHost();
-        ActivateInGameHUD();
+        ActivateLobbyRoomHost();
     }
 
     private void StartClient()
     {
-        m_NetworkManager.StartClient();
+
         m_NetworkManager.networkAddress = inputFieldIP.text;
 
-        ActivateInGameHUD();
+        ActivateLobbyRoomClient();
     }
 
     private void StartServer()
     {
-        m_NetworkManager.StartServer();
-        ActivateInGameHUD();
+        ActivateLobbyRoomServer();
     }
 }
