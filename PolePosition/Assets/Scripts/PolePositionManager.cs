@@ -85,6 +85,7 @@ public class PolePositionManager : NetworkBehaviour
         }
 
         Debug.Log("El orden de carrera es: " + myRaceOrder);
+        
     }
 
     float ComputeCarArcLength(int ID)

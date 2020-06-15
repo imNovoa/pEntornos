@@ -60,7 +60,7 @@ public class SetupPlayer : NetworkBehaviour
     {
         base.OnStartClient();
         m_PlayerInfo.ID = m_ID;
-        m_PlayerInfo.CurrentLap = 0;
+        m_PlayerInfo.CurrentLap = -1;
         m_PlayerInfo.Name = m_Name;
         m_PlayerInfo.Color = m_Color;
 
@@ -77,7 +77,7 @@ public class SetupPlayer : NetworkBehaviour
     {
         CmdProvideName(m_UIManager.insertName.text);
         CmdProvideColor(m_UIManager.InputColor.value);
-        if (m_PolePositionManager.numPlayers > 1)
+        if (m_PolePositionManager.numPlayers > 0)
         {
             CmdCanStartCar();
         }

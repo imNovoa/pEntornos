@@ -69,6 +69,7 @@ public class PlayerController : NetworkBehaviour
             InputSteering = Input.GetAxis(("Horizontal"));
             InputBrake = Input.GetAxis("Jump");
             Speed = m_Rigidbody.velocity.magnitude;
+            
         }
     }
 
@@ -126,14 +127,20 @@ public class PlayerController : NetworkBehaviour
                 ApplyLocalPositionToVisuals(axleInfo.leftWheel);
                 ApplyLocalPositionToVisuals(axleInfo.rightWheel);
             }
-
+            Debug.Log("Vueltas: " + m_PlayerInfo.CurrentLap);
             SteerHelper();
             SpeedLimiter();
             AddDownForce();
             TractionControl();
         }
     }
-
+    public void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.name == "finishLine")
+        {
+            m_PlayerInfo.CurrentLap++;
+        }
+    }
     #endregion
 
     #region Methods
