@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Timers;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+
 
 /*
 	Documentation: https://mirror-networking.com/docs/Guides/NetworkBehaviour.html
@@ -35,6 +37,10 @@ public class PlayerController : NetworkBehaviour
 
     private float m_CurrentSpeed = 0;
 
+    private Timer m_afk = new Timer(6000);
+    private bool m_onMovement = false;
+    private bool cocheAtascado = false;
+
     private float Speed
     {
         get { return m_CurrentSpeed; }
@@ -44,8 +50,21 @@ public class PlayerController : NetworkBehaviour
             m_CurrentSpeed = value;
             if (OnSpeedChangeEvent != null)
                 OnSpeedChangeEvent(m_CurrentSpeed);
+            if (OnSpeedChangeEvent == null) ;           
         }
     }
+
+    public bool checkProblems()
+    {
+        if (cocheAtascado == true)
+        {
+            cocheAtascado = false;
+            return true;
+        }
+        else return false;
+    }
+
+
 
     public delegate void OnSpeedChangeDelegate(float newVal);
 
@@ -59,6 +78,13 @@ public class PlayerController : NetworkBehaviour
     {
         m_Rigidbody = GetComponent<Rigidbody>();
         m_PlayerInfo = GetComponent<PlayerInfo>();
+        m_afk.Elapsed += colocarCoche;
+    }
+
+    public void colocarCoche(object source, System.Timers.ElapsedEventArgs e)
+    {
+        m_afk.Stop();
+        cocheAtascado = true;
     }
 
     public void Update()
@@ -70,6 +96,20 @@ public class PlayerController : NetworkBehaviour
             InputBrake = Input.GetAxis("Jump");
             Speed = m_Rigidbody.velocity.magnitude;
         }
+
+        if (m_CurrentSpeed > 1 || m_CurrentSpeed < -1)
+        {
+            Debug.Log("Moviendose " + m_onMovement);
+            m_onMovement = true;
+            m_afk.Stop();
+        }
+        if (m_CurrentSpeed > -1 && m_CurrentSpeed < 1 && m_onMovement == true)
+        {
+            m_afk.Start();
+            Debug.Log("Parado " + m_onMovement);
+            m_onMovement = false;
+        }
+        
     }
 
     public void FixedUpdate()

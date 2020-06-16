@@ -15,7 +15,7 @@ public class PlayerInfo : MonoBehaviour
 
     public int CurrentLap { get; set; }
 
-    public bool StartCar { get; set; }
+    public bool StartCar = true; //{ get; set; }
 
     public override string ToString()
     {

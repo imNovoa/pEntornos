@@ -14,15 +14,6 @@ public class SetupPlayer : NetworkBehaviour
     [SyncVar] private string m_Name;
     [SyncVar] private Color m_Color;
 
-    /*
-    public Color COLOR_RED = new Color(0.8F, 0.1F, 0.1F);
-    public Color COLOR_GREEN = new Color(0.1F, 0.8F, 0.1F);
-    public Color COLOR_BLUE = new Color(0.1F, 0.1F, 0.8F);
-    public Color COLOR_BLACK = new Color(0.1F, 0.1F, 0.1F);
-    public Color COLOR_ORANGE = new Color(0.7F, 0.3F, 0.2F);
-    public Color COLOR_WHITE = new Color(0.8F, 0.8F, 0.8F);
-    */
-
     private Color[] PLAYER_COLORS =
     {
         new Color(0.8F, 0.1F, 0.1F), //RED
@@ -104,18 +95,12 @@ public class SetupPlayer : NetworkBehaviour
         RpcPlayerColor(colorId);
     }
 
-    [Command]
-    void CmdUpdateUI()
-    {
-        RpcUpdateUI(m_UIManager.textPosition.text);
-    }
-
     [ClientRpc]
     void RpcPlayerName(string name)
     {        
         m_PlayerInfo.Name = name;
         m_UIManager.textPosition.text += name + "\n";
-        CmdUpdateUI();
+        //CmdUpdateUI();
     }
 
     [ClientRpc]
@@ -123,12 +108,6 @@ public class SetupPlayer : NetworkBehaviour
     {
         m_PlayerInfo.Color = PLAYER_COLORS[colorId];
         GetComponentInChildren<Renderer>().materials[1].color = PLAYER_COLORS[colorId];
-    }
-
-    [ClientRpc]
-    void RpcUpdateUI(string UIcontent)
-    {
-        m_UIManager.textPosition.text = UIcontent;
     }
 
     [ClientRpc]
@@ -168,5 +147,18 @@ public class SetupPlayer : NetworkBehaviour
     void ConfigureCamera()
     {
         if (Camera.main != null) Camera.main.gameObject.GetComponent<CameraController>().m_Focus = this.gameObject;
+    }
+
+    private void Update()
+    {
+        m_UIManager.textPosition.text = m_PolePositionManager.UpdateUI();
+        if (m_PlayerController.checkProblems())
+        {
+            Quaternion rot = new Quaternion(0.0f, m_PlayerInfo.transform.rotation.y, m_PlayerInfo.transform.rotation.z, m_PlayerInfo.transform.rotation.w);
+            Vector3 pos;
+            pos = m_PolePositionManager.SpherePosition(m_PlayerInfo.ID);
+            pos.y += 5.0f;
+            m_PlayerInfo.transform.SetPositionAndRotation(pos, rot);
+        }
     }
 }

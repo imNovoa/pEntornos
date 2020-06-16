@@ -35,9 +35,15 @@ public class PolePositionManager : NetworkBehaviour
         UpdateRaceProgress();
     }
 
+    public Vector3 SpherePosition(int ID)
+    {
+        return m_DebuggingSpheres[ID].transform.position;
+    }
+
     public void AddPlayer(PlayerInfo player)
     {
         m_Players.Add(player);
+        player.CurrentPosition = m_Players.Count - 1;
         numPlayers++;
     }
 
@@ -60,7 +66,7 @@ public class PolePositionManager : NetworkBehaviour
 
         public override int Compare(PlayerInfo x, PlayerInfo y)
         {
-            if (this.m_ArcLengths[x.ID] < m_ArcLengths[y.ID])
+            if (this.m_ArcLengths[x.CurrentPosition] < m_ArcLengths[y.CurrentPosition])
                 return 1;
             else return -1;
         }
@@ -75,16 +81,31 @@ public class PolePositionManager : NetworkBehaviour
         {
             arcLengths[i] = ComputeCarArcLength(i);
         }
-
+        
         m_Players.Sort(new PlayerInfoComparer(arcLengths));
+
+        for (int i = 0; i < m_Players.Count; ++i)
+        {
+            m_Players[i].CurrentPosition = i;
+        }
 
         string myRaceOrder = "";
         foreach (var _player in m_Players)
         {
-            myRaceOrder += _player.Name + " " + _player.ID + " ";
+            myRaceOrder += _player.Name + " " + _player.CurrentPosition + " " + _player.ID;
         }
 
         Debug.Log("El orden de carrera es: " + myRaceOrder);
+    }
+
+    public string UpdateUI()
+    {
+        string UpdatedPositions = "";
+        foreach (var _player in m_Players)
+        {
+            UpdatedPositions += _player.Name + " " + _player.CurrentPosition + "º" + "\n";
+        }
+        return UpdatedPositions;
     }
 
     float ComputeCarArcLength(int ID)
