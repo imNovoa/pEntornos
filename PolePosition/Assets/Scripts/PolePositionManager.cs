@@ -35,10 +35,19 @@ public class PolePositionManager : NetworkBehaviour
         UpdateRaceProgress();
     }
 
+
     public void AddPlayer(PlayerInfo player)
     {
         m_Players.Add(player);
         numPlayers++;
+    }
+
+    public void AllStartTrue()
+    {
+        foreach (var item in m_Players)
+        {
+            item.StartCar = true;
+        }
     }
 
     private class PlayerInfoComparer : Comparer<PlayerInfo>
@@ -76,7 +85,7 @@ public class PolePositionManager : NetworkBehaviour
             myRaceOrder += _player.Name + " " + _player.ID + " ";
         }
 
-        Debug.Log("El orden de carrera es: " + myRaceOrder);
+        //Debug.Log("El orden de carrera es: " + myRaceOrder);
     }
 
     float ComputeCarArcLength(int ID)
