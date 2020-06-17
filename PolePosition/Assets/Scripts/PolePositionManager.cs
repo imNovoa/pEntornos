@@ -95,7 +95,7 @@ public class PolePositionManager : NetworkBehaviour
             myRaceOrder += _player.Name + " " + _player.CurrentPosition + " " + _player.ID;
         }
 
-        Debug.Log("El orden de carrera es: " + myRaceOrder);
+        //Debug.Log("El orden de carrera es: " + myRaceOrder);
     }
 
     public string UpdateUI()

@@ -99,14 +99,14 @@ public class PlayerController : NetworkBehaviour
 
         if (m_CurrentSpeed > 1 || m_CurrentSpeed < -1)
         {
-            Debug.Log("Moviendose " + m_onMovement);
+            //Debug.Log("Moviendose " + m_onMovement);
             m_onMovement = true;
             m_afk.Stop();
         }
         if (m_CurrentSpeed > -1 && m_CurrentSpeed < 1 && m_onMovement == true)
         {
             m_afk.Start();
-            Debug.Log("Parado " + m_onMovement);
+            //Debug.Log("Parado " + m_onMovement);
             m_onMovement = false;
         }
         

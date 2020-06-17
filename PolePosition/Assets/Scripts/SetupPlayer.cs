@@ -13,6 +13,8 @@ public class SetupPlayer : NetworkBehaviour
     [SyncVar] private int m_ID;
     [SyncVar] private string m_Name;
     [SyncVar] private Color m_Color;
+    //[SyncVar] private int m_playersReady;
+
 
     private Color[] PLAYER_COLORS =
     {
@@ -29,6 +31,7 @@ public class SetupPlayer : NetworkBehaviour
     private PlayerController m_PlayerController;
     private PlayerInfo m_PlayerInfo;
     private PolePositionManager m_PolePositionManager;
+    
 
     #region Start & Stop Callbacks
 
@@ -68,7 +71,8 @@ public class SetupPlayer : NetworkBehaviour
     {
         CmdProvideName(m_UIManager.insertName.text);
         CmdProvideColor(m_UIManager.InputColor.value);
-        if (m_PolePositionManager.numPlayers > 1)
+        CmdNumPlayers();
+        if (m_PolePositionManager.numPlayers > 2)
         {
             CmdCanStartCar();
         }
@@ -78,6 +82,13 @@ public class SetupPlayer : NetworkBehaviour
     void CmdCanStartCar()
     {
         RpcCanStartCar();
+    }
+
+    [Command]
+    void CmdNumPlayers()
+    {
+        //Debug.Log("m_playersReady CMD" + m_playersReady);
+        RpcNumPlayers();
     }
 
     [Command]
@@ -114,6 +125,17 @@ public class SetupPlayer : NetworkBehaviour
     void RpcCanStartCar()
     {
         m_PolePositionManager.AllStartTrue();
+    }
+
+    [ClientRpc]
+    void RpcNumPlayers()
+    {
+        m_UIManager.playersReady.text = "Players ready: " + m_PolePositionManager.numPlayers;
+        if (m_PolePositionManager.numPlayers > 2)
+        {
+            m_UIManager.ActivateInGameHUD();
+        }
+        //Debug.Log("m_playersReady RPC" + m_playersReady);
     }
 
     #endregion

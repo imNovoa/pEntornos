@@ -22,7 +22,7 @@ public class UIManager : MonoBehaviour
     [Header("Lobby Room")] [SerializeField] private GameObject lobbyRoom;
     [SerializeField] private Button buttonReady;
     [SerializeField] private Button buttonReturn;
-    [SerializeField] private Text playersReady;
+    [SerializeField] public Text playersReady;
 
     [Header("In-Game HUD")]
     [SerializeField]
@@ -72,7 +72,7 @@ public class UIManager : MonoBehaviour
 
     private void ActivateLobbyRoomHost()
     {
-        buttonReady.onClick.AddListener(() => ActivateInGameHUD());
+        //buttonReady.onClick.AddListener(() => ActivateInGameHUD());
         buttonReady.onClick.AddListener(() => m_NetworkManager.StartHost());
         buttonReturn.onClick.AddListener(() => ReturnToMenu());
         mainMenu.SetActive(false);
@@ -82,7 +82,7 @@ public class UIManager : MonoBehaviour
 
     private void ActivateLobbyRoomClient()
     {
-        buttonReady.onClick.AddListener(() => ActivateInGameHUD());
+        //buttonReady.onClick.AddListener(() => ActivateInGameHUD());
         buttonReady.onClick.AddListener(() => m_NetworkManager.StartClient());
         buttonReturn.onClick.AddListener(() => ReturnToMenu());
         mainMenu.SetActive(false);
@@ -92,7 +92,7 @@ public class UIManager : MonoBehaviour
 
     private void ActivateLobbyRoomServer()
     {
-        buttonReady.onClick.AddListener(() => ActivateInGameHUD());
+        //buttonReady.onClick.AddListener(() => ActivateInGameHUD());
         buttonReady.onClick.AddListener(() => m_NetworkManager.StartServer());
         buttonReturn.onClick.AddListener(() => ReturnToMenu());
         mainMenu.SetActive(false);
@@ -100,7 +100,7 @@ public class UIManager : MonoBehaviour
         lobbyRoom.SetActive(true);
     }
 
-    private void ActivateInGameHUD()
+    public void ActivateInGameHUD()
     {
         mainMenu.SetActive(false);
         lobbyRoom.SetActive(false);
@@ -116,10 +116,7 @@ public class UIManager : MonoBehaviour
     {
 
         m_NetworkManager.networkAddress = inputFieldIP.text;
-        m_NetworkManager.StartClient();
-        mainMenu.SetActive(false);
-        inGameHUD.SetActive(true);
-        lobbyRoom.SetActive(false);
+        ActivateLobbyRoomClient();
     }
 
     private void StartServer()
