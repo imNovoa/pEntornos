@@ -132,7 +132,7 @@ b8a5e8091ab0b8861d2add371082c5e0 Unity.TextMeshPro.dll:TMPro.TMP_SpriteAsset
 e36709809298bae5b8e041c8dcbda024 Mirror.Components.dll:Mirror.NetworkRoomManager
 991d2e8f56cd6070136c2ea5db7ccd6d Mirror.Examples.dll:Mirror.Examples.Tanks.Tank
 b3ab2106268377ffe25dd18ac23dca28 Unity.TextMeshPro.dll:TMPro.TMP_Asset
-6830e48bf5507cb5bf3d8e821721d925 Assembly-CSharp.dll:.PlayerController
+50de5e4675a66a832b20a4b3f7a41b16 Assembly-CSharp.dll:.PlayerController
 917dd6bef69408a9f3d17af7b937f135 Assembly-CSharp.dll:.PlayerInfo
 867f53826ad7fce6f076e95d115513ff Assembly-CSharp.dll:.PolePositionManager
 702330b33d6f348f76db0c974f6e02c3 Mirror.Authenticators.dll:Mirror.Authenticators.BasicAuthenticator

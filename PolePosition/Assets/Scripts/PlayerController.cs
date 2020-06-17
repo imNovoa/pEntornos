@@ -24,6 +24,9 @@ public class PlayerController : NetworkBehaviour
     public float downForce = 100f;
     public float slipLimit = 0.2f;
 
+    public bool vueltaCorrecta;
+    private float startTime;
+    private float t;
     private float CurrentRotation { get; set; }
     private float InputAcceleration { get; set; }
     private float InputSteering { get; set; }
@@ -79,6 +82,7 @@ public class PlayerController : NetworkBehaviour
         m_Rigidbody = GetComponent<Rigidbody>();
         m_PlayerInfo = GetComponent<PlayerInfo>();
         m_afk.Elapsed += colocarCoche;
+        startTime = Time.time;
     }
 
     public void colocarCoche(object source, System.Timers.ElapsedEventArgs e)
@@ -166,11 +170,29 @@ public class PlayerController : NetworkBehaviour
                 ApplyLocalPositionToVisuals(axleInfo.leftWheel);
                 ApplyLocalPositionToVisuals(axleInfo.rightWheel);
             }
-
+            Debug.Log("Vueltas: " + m_PlayerInfo.CurrentLap);
+            Debug.Log("Vuelta Correcta: " + vueltaCorrecta);
             SteerHelper();
             SpeedLimiter();
             AddDownForce();
             TractionControl();
+        }
+    }
+
+    public void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.name == "controlPoint")
+        {
+            vueltaCorrecta = true;
+        }
+
+        if (col.gameObject.name == "finishLine" && vueltaCorrecta)
+        {
+            m_PlayerInfo.CurrentLap++;
+            vueltaCorrecta = false;
+            t = Time.time - startTime;
+            m_PlayerInfo.raceTime = t;
+            Debug.Log("Tiempo: " + t);
         }
     }
 

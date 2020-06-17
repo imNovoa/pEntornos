@@ -39,6 +39,7 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
+        inputFieldIP.text = "localhost";
         buttonHost.onClick.AddListener(() => StartHost());
         buttonClient.onClick.AddListener(() => StartClient());
         buttonServer.onClick.AddListener(() => StartServer());

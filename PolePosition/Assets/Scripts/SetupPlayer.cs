@@ -72,7 +72,7 @@ public class SetupPlayer : NetworkBehaviour
         CmdProvideName(m_UIManager.insertName.text);
         CmdProvideColor(m_UIManager.InputColor.value);
         CmdNumPlayers();
-        if (m_PolePositionManager.numPlayers > 2)
+        if (m_PolePositionManager.numPlayers > 0)
         {
             CmdCanStartCar();
         }
@@ -131,7 +131,7 @@ public class SetupPlayer : NetworkBehaviour
     void RpcNumPlayers()
     {
         m_UIManager.playersReady.text = "Players ready: " + m_PolePositionManager.numPlayers;
-        if (m_PolePositionManager.numPlayers > 2)
+        if (m_PolePositionManager.numPlayers > 0)
         {
             m_UIManager.ActivateInGameHUD();
         }
@@ -178,7 +178,7 @@ public class SetupPlayer : NetworkBehaviour
         {
             Quaternion rot = new Quaternion(0.0f, m_PlayerInfo.transform.rotation.y, m_PlayerInfo.transform.rotation.z, m_PlayerInfo.transform.rotation.w);
             Vector3 pos;
-            pos = m_PolePositionManager.SpherePosition(m_PlayerInfo.ID);
+            pos = m_PolePositionManager.SpherePosition(m_PlayerInfo.CurrentPosition);
             pos.y += 5.0f;
             m_PlayerInfo.transform.SetPositionAndRotation(pos, rot);
         }
