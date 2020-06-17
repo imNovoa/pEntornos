@@ -22,6 +22,9 @@ public class PlayerController : NetworkBehaviour
     public float downForce = 100f;
     public float slipLimit = 0.2f;
 
+    public bool vueltaCorrecta;
+    private float startTime;
+    private float t;
     private float CurrentRotation { get; set; }
     private float InputAcceleration { get; set; }
     private float InputSteering { get; set; }
@@ -59,6 +62,7 @@ public class PlayerController : NetworkBehaviour
     {
         m_Rigidbody = GetComponent<Rigidbody>();
         m_PlayerInfo = GetComponent<PlayerInfo>();
+        startTime = Time.time;
     }
 
     public void Update()
@@ -69,6 +73,7 @@ public class PlayerController : NetworkBehaviour
             InputSteering = Input.GetAxis(("Horizontal"));
             InputBrake = Input.GetAxis("Jump");
             Speed = m_Rigidbody.velocity.magnitude;
+
             
         }
     }
@@ -128,6 +133,7 @@ public class PlayerController : NetworkBehaviour
                 ApplyLocalPositionToVisuals(axleInfo.rightWheel);
             }
             Debug.Log("Vueltas: " + m_PlayerInfo.CurrentLap);
+            Debug.Log("Vuelta Correcta: " + vueltaCorrecta);
             SteerHelper();
             SpeedLimiter();
             AddDownForce();
@@ -136,9 +142,18 @@ public class PlayerController : NetworkBehaviour
     }
     public void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.name == "finishLine")
+        if (col.gameObject.name == "controlPoint")
+        {
+            vueltaCorrecta = true;
+        }
+
+        if (col.gameObject.name == "finishLine" && vueltaCorrecta)
         {
             m_PlayerInfo.CurrentLap++;
+            vueltaCorrecta = false;
+            t = Time.time - startTime;
+            m_PlayerInfo.raceTime = t;
+            Debug.Log("Tiempo: " + t);
         }
     }
     #endregion

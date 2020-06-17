@@ -17,6 +17,8 @@ public class PlayerInfo : MonoBehaviour
 
     public bool StartCar { get; set; }
 
+    public float raceTime { get; set; }
+
     public override string ToString()
     {
         return Name;
