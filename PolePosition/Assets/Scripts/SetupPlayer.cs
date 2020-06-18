@@ -79,6 +79,12 @@ public class SetupPlayer : NetworkBehaviour
     }
 
     [Command]
+    void CmdEndgame()
+    {
+        RpcEndgame();
+    }
+
+    [Command]
     void CmdCanStartCar()
     {
         RpcCanStartCar();
@@ -104,6 +110,12 @@ public class SetupPlayer : NetworkBehaviour
     {
         m_Color = PLAYER_COLORS[colorId];
         RpcPlayerColor(colorId);
+    }
+
+    [ClientRpc]
+    void RpcEndgame()
+    {
+        
     }
 
     [ClientRpc]

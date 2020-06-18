@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public bool showGUI = true;
+    private int nextPos = 1;
 
     private NetworkManager m_NetworkManager;
 
@@ -24,12 +25,17 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Button buttonReturn;
     [SerializeField] public Text playersReady;
 
+    [Header("Score Room")] [SerializeField] private GameObject scoreRoom;
+    [SerializeField] private Button buttonDisconnect;
+    [SerializeField] private Text score;
+
     [Header("In-Game HUD")]
     [SerializeField]
     private GameObject inGameHUD;
 
     [SerializeField] private Text textSpeed;
     [SerializeField] private Text textLaps;
+    [SerializeField] private Text EndingMessage;
     [SerializeField] public Text textPosition;
 
     private void Awake()
@@ -43,8 +49,23 @@ public class UIManager : MonoBehaviour
         buttonHost.onClick.AddListener(() => StartHost());
         buttonClient.onClick.AddListener(() => StartClient());
         buttonServer.onClick.AddListener(() => StartServer());
+        EndingMessage.enabled = false;
         ActivateMainMenu();
     }
+
+    public void ShowScore(String jug, int t)
+    {
+        score.text += nextPos + "º " + jug + "   :       " + t + " seg \n";
+        nextPos++;
+    }
+
+    public void PlayerEnded()
+    {
+        EndingMessage.enabled = true;
+        textSpeed.enabled = false;
+        textLaps.enabled = false;
+        textPosition.enabled = false;
+    }    
 
     public void UpdateSpeed(int speed)
     {
@@ -61,6 +82,7 @@ public class UIManager : MonoBehaviour
         mainMenu.SetActive(true);
         inGameHUD.SetActive(false);
         lobbyRoom.SetActive(false);
+        scoreRoom.SetActive(false);
     }
 
     private void ReturnToMenu()
@@ -69,36 +91,62 @@ public class UIManager : MonoBehaviour
         mainMenu.SetActive(true);
         inGameHUD.SetActive(false);
         lobbyRoom.SetActive(false);
+        scoreRoom.SetActive(false);
+    }
+
+    private void GoToScore()
+    {
+        buttonDisconnect.onClick.AddListener(() => ReturnToMenu());
+        //buttonDisconnect.onClick.AddListener(() => ExitMatch());
+        mainMenu.SetActive(false);
+        inGameHUD.SetActive(false);
+        lobbyRoom.SetActive(false);
+        scoreRoom.SetActive(true);
     }
 
     private void ActivateLobbyRoomHost()
     {
         //buttonReady.onClick.AddListener(() => ActivateInGameHUD());
-        buttonReady.onClick.AddListener(() => m_NetworkManager.StartHost());
+
+        //buttonReady.onClick.AddListener(() => m_NetworkManager.StartHost());
+        buttonReady.onClick.AddListener(() => DestroyButtons());
         buttonReturn.onClick.AddListener(() => ReturnToMenu());
         mainMenu.SetActive(false);
         inGameHUD.SetActive(false);
         lobbyRoom.SetActive(true);
+        scoreRoom.SetActive(false);
+    }
+
+    private void DestroyButtons()
+    {
+        Destroy(buttonReady.gameObject);
+        Destroy(buttonReturn.gameObject);
     }
 
     private void ActivateLobbyRoomClient()
     {
         //buttonReady.onClick.AddListener(() => ActivateInGameHUD());
+
         buttonReady.onClick.AddListener(() => m_NetworkManager.StartClient());
+        buttonReady.onClick.AddListener(() => DestroyButtons());
         buttonReturn.onClick.AddListener(() => ReturnToMenu());
         mainMenu.SetActive(false);
         inGameHUD.SetActive(false);
         lobbyRoom.SetActive(true);
+        scoreRoom.SetActive(false);
     }
 
     private void ActivateLobbyRoomServer()
     {
         //buttonReady.onClick.AddListener(() => ActivateInGameHUD());
-        buttonReady.onClick.AddListener(() => m_NetworkManager.StartServer());
+        
+        //buttonReady.onClick.AddListener(() => m_NetworkManager.StartServer());
+        buttonReady.onClick.AddListener(() => DestroyButtons());
         buttonReturn.onClick.AddListener(() => ReturnToMenu());
         mainMenu.SetActive(false);
         inGameHUD.SetActive(false);
         lobbyRoom.SetActive(true);
+        scoreRoom.SetActive(false);
     }
 
     public void ActivateInGameHUD()
@@ -106,6 +154,7 @@ public class UIManager : MonoBehaviour
         mainMenu.SetActive(false);
         lobbyRoom.SetActive(false);
         inGameHUD.SetActive(true);
+        scoreRoom.SetActive(false);
     }
 
     private void StartHost()

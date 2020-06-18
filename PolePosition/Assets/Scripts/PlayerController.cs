@@ -53,7 +53,7 @@ public class PlayerController : NetworkBehaviour
             m_CurrentSpeed = value;
             if (OnSpeedChangeEvent != null)
                 OnSpeedChangeEvent(m_CurrentSpeed);
-            if (OnSpeedChangeEvent == null) ;           
+            if (OnSpeedChangeEvent == null);           
         }
     }
 
@@ -116,6 +116,15 @@ public class PlayerController : NetworkBehaviour
         
     }
 
+    public int EndChecker()
+    {
+        if (m_PlayerInfo.CurrentLap > 3)
+        {
+            return m_PlayerInfo.ID;
+        }
+        return -1;
+    }
+    
     public void FixedUpdate()
     {
         if (m_PlayerInfo.StartCar)
