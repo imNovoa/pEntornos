@@ -14,6 +14,8 @@ public class PolePositionManager : NetworkBehaviour
     private CircuitController m_CircuitController;
     private GameObject[] m_DebuggingSpheres;
 
+    private GameObject[] m_Checkpoints = new GameObject[8];
+
     private void Awake()
     {
         if (networkManager == null) networkManager = FindObjectOfType<NetworkManager>();
@@ -25,6 +27,15 @@ public class PolePositionManager : NetworkBehaviour
             m_DebuggingSpheres[i] = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             m_DebuggingSpheres[i].GetComponent<SphereCollider>().enabled = false;
         }
+
+        m_Checkpoints[0] = GameObject.Find("Waypoint 0");
+        m_Checkpoints[1] = GameObject.Find("Waypoint 1");
+        m_Checkpoints[2] = GameObject.Find("Waypoint 2");
+        m_Checkpoints[3] = GameObject.Find("Waypoint 3");
+        m_Checkpoints[4] = GameObject.Find("Waypoint 4");
+        m_Checkpoints[5] = GameObject.Find("Waypoint 5");
+        m_Checkpoints[6] = GameObject.Find("Waypoint 6");
+        m_Checkpoints[7] = GameObject.Find("Waypoint 7");
     }
 
     private void Update()
@@ -39,6 +50,12 @@ public class PolePositionManager : NetworkBehaviour
     {
         return m_DebuggingSpheres[ID].transform.position;
     }
+
+    public Vector3 getCurrentWaypoint(int ID)
+    {
+        return m_Checkpoints[ID].transform.position;
+    }
+
 
     public void AddPlayer(PlayerInfo player)
     {

@@ -15,6 +15,11 @@ public class SetupPlayer : NetworkBehaviour
     [SyncVar] private Color m_Color;
     //[SyncVar] private int m_playersReady;
 
+    //Waypoints variables
+    private int currentWaypoint = 0;
+    private float oldDis;
+
+
 
     private Color[] PLAYER_COLORS =
     {
@@ -154,6 +159,9 @@ public class SetupPlayer : NetworkBehaviour
     {
         if (isLocalPlayer)
         {
+            Vector3 waypointPos = m_PolePositionManager.getCurrentWaypoint(currentWaypoint);
+            Vector3 actualPos = m_PolePositionManager.SpherePosition(m_PlayerInfo.CurrentPosition);
+            oldDis = Vector3.Distance(waypointPos, actualPos);
             m_PlayerController.enabled = true;
             m_PlayerController.OnSpeedChangeEvent += OnSpeedChangeEventHandler;
             ConfigureCamera();
@@ -171,7 +179,7 @@ public class SetupPlayer : NetworkBehaviour
         if (Camera.main != null) Camera.main.gameObject.GetComponent<CameraController>().m_Focus = this.gameObject;
     }
 
-    private void Update()
+    void UpdatePosition()
     {
         m_UIManager.textPosition.text = m_PolePositionManager.UpdateUI();
         if (m_PlayerController.checkProblems())
@@ -182,5 +190,40 @@ public class SetupPlayer : NetworkBehaviour
             pos.y += 5.0f;
             m_PlayerInfo.transform.SetPositionAndRotation(pos, rot);
         }
+    }
+
+    void CheckPath()
+    {
+        Vector3 waypointPos = m_PolePositionManager.getCurrentWaypoint(currentWaypoint);
+        Vector3 actualPos = m_PolePositionManager.SpherePosition(m_PlayerInfo.CurrentPosition);
+        float newDis = Vector3.Distance(waypointPos, actualPos);
+
+        if(newDis < 1.0f && newDis > -1.0f)
+        {
+            if (currentWaypoint == 7)
+                currentWaypoint = 0;
+            else currentWaypoint += 1;
+        }
+
+        if(newDis > oldDis)
+        {
+            m_UIManager.checkPath.color = Color.red;
+            m_UIManager.checkPath.text = ("WRONG WAY");
+        }
+        else if (newDis < oldDis)
+        {
+            m_UIManager.checkPath.color = Color.green;
+            m_UIManager.checkPath.text = ("RIGHT WAY");            
+        } 
+
+        oldDis = newDis;
+    }
+
+    private void Update()
+    {
+        UpdatePosition();
+        CheckPath();
+        Debug.Log(currentWaypoint);
+        Debug.Log(oldDis);
     }
 }
