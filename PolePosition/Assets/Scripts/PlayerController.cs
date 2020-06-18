@@ -36,7 +36,7 @@ public class PlayerController : NetworkBehaviour
 
     private Rigidbody m_Rigidbody;
     private float m_SteerHelper = 0.8f;
-
+    private bool m_CanWin = true;
 
     private float m_CurrentSpeed = 0;
 
@@ -118,8 +118,9 @@ public class PlayerController : NetworkBehaviour
 
     public int EndChecker()
     {
-        if (m_PlayerInfo.CurrentLap > 3)
+        if (m_PlayerInfo.CurrentLap > 2 && m_CanWin)
         {
+            m_CanWin = false;
             return m_PlayerInfo.ID;
         }
         return -1;

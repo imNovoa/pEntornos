@@ -108,7 +108,7 @@ public class UIManager : MonoBehaviour
     {
         //buttonReady.onClick.AddListener(() => ActivateInGameHUD());
 
-        //buttonReady.onClick.AddListener(() => m_NetworkManager.StartHost());
+        buttonReady.onClick.AddListener(() => m_NetworkManager.StartHost());
         buttonReady.onClick.AddListener(() => DestroyButtons());
         buttonReturn.onClick.AddListener(() => ReturnToMenu());
         mainMenu.SetActive(false);
@@ -119,8 +119,8 @@ public class UIManager : MonoBehaviour
 
     private void DestroyButtons()
     {
-        Destroy(buttonReady.gameObject);
-        Destroy(buttonReturn.gameObject);
+        buttonReady.enabled = false;
+        buttonReturn.enabled = false;
     }
 
     private void ActivateLobbyRoomClient()
@@ -140,7 +140,7 @@ public class UIManager : MonoBehaviour
     {
         //buttonReady.onClick.AddListener(() => ActivateInGameHUD());
         
-        //buttonReady.onClick.AddListener(() => m_NetworkManager.StartServer());
+        buttonReady.onClick.AddListener(() => m_NetworkManager.StartServer());
         buttonReady.onClick.AddListener(() => DestroyButtons());
         buttonReturn.onClick.AddListener(() => ReturnToMenu());
         mainMenu.SetActive(false);
