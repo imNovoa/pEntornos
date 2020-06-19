@@ -19,8 +19,6 @@ public class SetupPlayer : NetworkBehaviour
     private int currentWaypoint = 0;
     private float oldDis;
 
-
-
     private Color[] PLAYER_COLORS =
     {
         new Color(0.8F, 0.1F, 0.1F), //RED
@@ -111,6 +109,12 @@ public class SetupPlayer : NetworkBehaviour
         RpcPlayerColor(colorId);
     }
 
+    [Command]
+    void CmdUpdateScore(String jug, float t)
+    {
+        RpcUpdateScore(jug, t);
+    }
+
     [ClientRpc]
     void RpcPlayerName(string name)
     {        
@@ -141,6 +145,12 @@ public class SetupPlayer : NetworkBehaviour
             m_UIManager.ActivateInGameHUD();
         }
         //Debug.Log("m_playersReady RPC" + m_playersReady);
+    }
+
+    [ClientRpc]
+    void RpcUpdateScore(String jug, float t)
+    {
+        m_UIManager.ShowScore(jug, t);
     }
 
     #endregion
@@ -217,10 +227,16 @@ public class SetupPlayer : NetworkBehaviour
         } 
 
         oldDis = newDis;
-    }
+    }   
 
     private void Update()
     {
+        String NameFinish = m_PlayerController.EndChecker();
+        if (NameFinish != "-1")
+        {
+            CmdUpdateScore(NameFinish, m_PlayerController.time);
+        }
+
         UpdatePosition();
         CheckPath();
         Debug.Log(currentWaypoint);
