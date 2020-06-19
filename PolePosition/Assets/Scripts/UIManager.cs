@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Timers;
 using System.Collections;
 using System.Collections.Generic;
 using Mirror;
@@ -9,6 +10,8 @@ public class UIManager : MonoBehaviour
 {
     public bool showGUI = true;
     private int nextPos = 1;
+    private Timer timerAux = new Timer(1000);
+    private bool boolAux = false;
 
     private NetworkManager m_NetworkManager;
 
@@ -33,6 +36,7 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private GameObject inGameHUD;
 
+    [SerializeField] private Text textCountdown;
     [SerializeField] private Text textSpeed;
     [SerializeField] private Text textLaps;
     [SerializeField] public Text textPosition;
@@ -52,6 +56,43 @@ public class UIManager : MonoBehaviour
         buttonServer.onClick.AddListener(() => StartServer());
         ActivateMainMenu();
     }
+
+    void ExecuteWait(float s)
+    {
+        StartCoroutine(Wait(s));
+    }
+
+    IEnumerator Wait(float sec)
+    {
+        Debug.Log(" Esperamos ");
+        yield return new WaitForSeconds(sec);
+    }
+
+    public void Esperamos(object source, System.Timers.ElapsedEventArgs e)
+    {
+        timerAux.Stop();
+        boolAux = true;
+    }
+
+    public void StartCountdown ()
+    {
+        textCountdown.enabled = true;
+        Debug.Log("Entramos");
+        for (int i = 5; i >= 0; i--)
+        {
+            Debug.Log(" " + i + " ");
+            textCountdown.text = " " + i + " ";
+            Wait(1000);
+            
+        }
+
+        textCountdown.text = " GO! ";
+        ExecuteWait(1);
+
+        textCountdown.enabled = false;
+        
+    }
+
 
     public void UpdateSpeed(int speed)
     {
@@ -155,6 +196,7 @@ public class UIManager : MonoBehaviour
         lobbyRoom.SetActive(false);
         inGameHUD.SetActive(true);
         scoreRoom.SetActive(false);
+        
     }
 
     private void StartHost()

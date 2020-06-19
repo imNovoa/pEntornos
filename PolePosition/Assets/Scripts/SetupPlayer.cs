@@ -133,6 +133,7 @@ public class SetupPlayer : NetworkBehaviour
     [ClientRpc]
     void RpcCanStartCar()
     {
+        m_UIManager.StartCountdown();
         m_PolePositionManager.AllStartTrue();
     }
 
@@ -239,7 +240,7 @@ public class SetupPlayer : NetworkBehaviour
 
         UpdatePosition();
         CheckPath();
-        Debug.Log(currentWaypoint);
-        Debug.Log(oldDis);
+        //Debug.Log(currentWaypoint);
+        //Debug.Log(oldDis);
     }
 }
