@@ -53,7 +53,7 @@ public class UIManager : MonoBehaviour
         ActivateMainMenu();
     }
 
-    public void ShowScore(String jug, int t)
+    public void ShowScore(String jug, float t)
     {
         score.text += nextPos + "º " + jug + "   :       " + t + " seg \n";
         nextPos++;

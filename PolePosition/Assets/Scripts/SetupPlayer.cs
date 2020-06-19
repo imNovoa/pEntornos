@@ -85,6 +85,12 @@ public class SetupPlayer : NetworkBehaviour
     }
 
     [Command]
+    void CmdUpdateScore(String jug, float t)
+    {
+        RpcUpdateScore(jug, t);
+    }
+
+    [Command]
     void CmdCanStartCar()
     {
         RpcCanStartCar();
@@ -116,6 +122,12 @@ public class SetupPlayer : NetworkBehaviour
     void RpcEndgame()
     {
         
+    }
+
+    [ClientRpc]
+    void RpcUpdateScore(String jug, float t)
+    {
+        m_UIManager.ShowScore(jug, t);
     }
 
     [ClientRpc]
@@ -185,6 +197,11 @@ public class SetupPlayer : NetworkBehaviour
 
     private void Update()
     {
+        String NameFinish = m_PlayerController.EndChecker();
+        if (NameFinish != "-1")
+        {
+            CmdUpdateScore(NameFinish, m_PlayerController.t);
+        }
         m_UIManager.textPosition.text = m_PolePositionManager.UpdateUI();
         if (m_PlayerController.checkProblems())
         {

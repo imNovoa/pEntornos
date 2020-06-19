@@ -26,7 +26,7 @@ public class PlayerController : NetworkBehaviour
 
     public bool vueltaCorrecta;
     private float startTime;
-    private float t;
+    public float t { get; set; }
     private float CurrentRotation { get; set; }
     private float InputAcceleration { get; set; }
     private float InputSteering { get; set; }
@@ -116,14 +116,14 @@ public class PlayerController : NetworkBehaviour
         
     }
 
-    public int EndChecker()
+    public String EndChecker()
     {
         if (m_PlayerInfo.CurrentLap > 2 && m_CanWin)
         {
             m_CanWin = false;
-            return m_PlayerInfo.ID;
+            return m_PlayerInfo.Name;
         }
-        return -1;
+        return "-1";
     }
     
     public void FixedUpdate()
