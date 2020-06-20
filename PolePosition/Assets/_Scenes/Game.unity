@@ -237,6 +237,18 @@ MonoBehaviour:
   m_Script: {fileID: 853051423, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1806844488 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4317576356256800194, guid: 5c339809502a33749b546f6663bcfb75,
+    type: 3}
+  m_PrefabInstance: {fileID: 6415909393553272841}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1839589612
 GameObject:
   m_ObjectHideFlags: 0
@@ -787,6 +799,11 @@ PrefabInstance:
       propertyPath: m_Text
       value: DISCONNECT
       objectReference: {fileID: 0}
+    - target: {fileID: 2132679814193993699, guid: 5c339809502a33749b546f6663bcfb75,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2557981623437109809, guid: 5c339809502a33749b546f6663bcfb75,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -811,6 +828,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2725311574612833777, guid: 5c339809502a33749b546f6663bcfb75,
+        type: 3}
+      propertyPath: m_Name
+      value: ButtonAux
       objectReference: {fileID: 0}
     - target: {fileID: 3436909846244961645, guid: 5c339809502a33749b546f6663bcfb75,
         type: 3}
@@ -923,6 +945,11 @@ PrefabInstance:
       propertyPath: EndingMessage
       value: 
       objectReference: {fileID: 6415909393553272842}
+    - target: {fileID: 6415909394017212768, guid: 5c339809502a33749b546f6663bcfb75,
+        type: 3}
+      propertyPath: buttontest
+      value: 
+      objectReference: {fileID: 1806844488}
     - target: {fileID: 6415909394017212769, guid: 5c339809502a33749b546f6663bcfb75,
         type: 3}
       propertyPath: m_Name
@@ -996,7 +1023,7 @@ PrefabInstance:
     - target: {fileID: 6415909394707280194, guid: 5c339809502a33749b546f6663bcfb75,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6724989810218384198, guid: 5c339809502a33749b546f6663bcfb75,
         type: 3}

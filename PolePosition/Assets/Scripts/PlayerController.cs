@@ -27,7 +27,6 @@ public class PlayerController : NetworkBehaviour
 
     public bool vueltaCorrecta;
     private float startTime;
-    private bool m_CanWin = true;
 
     private float CurrentRotation { get; set; }
     private float InputAcceleration { get; set; }
@@ -69,15 +68,7 @@ public class PlayerController : NetworkBehaviour
         else return false;
     }
 
-    public String EndChecker()
-    {
-        if (m_PlayerInfo.CurrentLap > 2 && m_CanWin)
-        {
-            m_CanWin = false;
-            return m_PlayerInfo.Name;
-        }
-        return "-1";
-    }
+    
 
     public delegate void OnSpeedChangeDelegate(float newVal);
 

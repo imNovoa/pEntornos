@@ -1,6 +1,6 @@
 Win64
 PlayerPath?
-C:/Users/Admin/Documents/GitHub/pEntornos/PolePosition/RacingProto.exe
+C:/Users/Ivan/Desktop/Nueva carpeta/pEntornos/PolePosition/Build/RacingProto.exe
 SceneListBegin?
 Assets/_Scenes/Game.unity
 SceneListEnd?
@@ -106,7 +106,7 @@ e1bbf0ab858085e38fae6b12ebbdcd35 UnityEngine.Timeline.dll:UnityEngine.Timeline.C
 e1bbf0ab858085e38fae6b12ebbdcd35 UnityEngine.Timeline.dll:UnityEngine.Timeline.GroupTrack
 e1bbf0ab858085e38fae6b12ebbdcd35 UnityEngine.Timeline.dll:UnityEngine.Timeline.PlayableTrack
 201e3fde670b00545944bb3db215c80a UnityEngine.Timeline.dll:UnityEngine.Timeline.TimelineAsset
-939470c5792e370ec3ed12a33e253502 Assembly-CSharp.dll:.UIManager
+aa9172950bebb0ad4aa2a1177ed164a1 Assembly-CSharp.dll:.UIManager
 0ff99d510934a09ffb11115e10289020 Mirror.dll:Mirror.Websocket.WebsocketTransport
 4e9333594897a1fb8b136ad2eae996c7 Unity.TextMeshPro.dll:TMPro.TMP_SubMeshUI
 e6ae40841db498b6e673877ac45ad208 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
@@ -132,8 +132,8 @@ b8a5e8091ab0b8861d2add371082c5e0 Unity.TextMeshPro.dll:TMPro.TMP_SpriteAsset
 e36709809298bae5b8e041c8dcbda024 Mirror.Components.dll:Mirror.NetworkRoomManager
 991d2e8f56cd6070136c2ea5db7ccd6d Mirror.Examples.dll:Mirror.Examples.Tanks.Tank
 b3ab2106268377ffe25dd18ac23dca28 Unity.TextMeshPro.dll:TMPro.TMP_Asset
-50de5e4675a66a832b20a4b3f7a41b16 Assembly-CSharp.dll:.PlayerController
-917dd6bef69408a9f3d17af7b937f135 Assembly-CSharp.dll:.PlayerInfo
+e07a3e0468cb6d45eb8d7b9fc4ebcd51 Assembly-CSharp.dll:.PlayerController
+34919f7115d8e9ce4b385b904d506245 Assembly-CSharp.dll:.PlayerInfo
 867f53826ad7fce6f076e95d115513ff Assembly-CSharp.dll:.PolePositionManager
 702330b33d6f348f76db0c974f6e02c3 Mirror.Authenticators.dll:Mirror.Authenticators.BasicAuthenticator
 71bb6a6b6c8f052f948db64c7dd3ca4f Unity.TextMeshPro.dll:TMPro.TMP_SpriteAnimator

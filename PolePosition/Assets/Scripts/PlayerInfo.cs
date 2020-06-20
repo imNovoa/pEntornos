@@ -19,6 +19,8 @@ public class PlayerInfo : MonoBehaviour
 
     public bool StartCar = true; //{ get; set; }
 
+    public bool CanWin = true;
+
     public override string ToString()
     {
         return Name;

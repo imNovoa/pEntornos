@@ -191,13 +191,13 @@ public class SetupPlayer : NetworkBehaviour
 
     void UpdatePosition()
     {
-        m_UIManager.textPosition.text = m_PolePositionManager.UpdateUI();
+        
         if (m_PlayerController.checkProblems())
         {
-            Quaternion rot = new Quaternion(0.0f, m_PlayerInfo.transform.rotation.y, m_PlayerInfo.transform.rotation.z, m_PlayerInfo.transform.rotation.w);
+            Quaternion rot = new Quaternion(0, m_PlayerInfo.transform.rotation.y, 0, m_PlayerInfo.transform.rotation.w);
             Vector3 pos;
             pos = m_PolePositionManager.SpherePosition(m_PlayerInfo.CurrentPosition);
-            pos.y += 5.0f;
+            pos.y += 0.5f;
             m_PlayerInfo.transform.SetPositionAndRotation(pos, rot);
         }
     }
@@ -227,19 +227,35 @@ public class SetupPlayer : NetworkBehaviour
         } 
 
         oldDis = newDis;
-    }   
+    }
+
+    public String EndChecker()
+    {
+        if (m_PlayerInfo.CurrentLap > 0 && m_PlayerInfo.CanWin)
+        {
+            m_PlayerInfo.CanWin = false;
+            m_UIManager.GoToScore();
+            return m_PlayerInfo.Name;            
+        }
+        return "-1";
+    }
 
     private void Update()
     {
-        String NameFinish = m_PlayerController.EndChecker();
-        if (NameFinish != "-1")
+        if (isLocalPlayer)
         {
-            CmdUpdateScore(NameFinish, m_PlayerController.time);
-        }
+            m_UIManager.textPosition.text = m_PolePositionManager.UpdateUI();
 
-        UpdatePosition();
-        CheckPath();
-        Debug.Log(currentWaypoint);
-        Debug.Log(oldDis);
+            String NameFinish = EndChecker();
+            if (NameFinish != "-1")
+            {
+                //m_PlayerController.enabled = false;                
+                CmdUpdateScore(NameFinish, m_PlayerController.time);
+
+            }
+
+            UpdatePosition();
+            CheckPath();
+        }
     }
 }
