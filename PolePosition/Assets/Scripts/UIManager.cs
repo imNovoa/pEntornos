@@ -36,6 +36,7 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private Text textSpeed;
     [SerializeField] private Text textLaps;
+    [SerializeField] public Text textCountdown;
     [SerializeField] public Text textPosition;
     [SerializeField] private Text EndingMessage;
     [SerializeField] public Text checkPath;

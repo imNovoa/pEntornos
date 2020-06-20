@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using Mirror;
 using UnityEngine;
 using Random = System.Random;
@@ -66,6 +67,19 @@ public class SetupPlayer : NetworkBehaviour
 
     }
 
+    private IEnumerator Countdown(float waitTime)
+    {
+        for (int i = 3; i > 0; i--)
+        {
+            m_UIManager.textCountdown.text = " " + i + " ";
+            yield return new WaitForSeconds(waitTime);
+        }
+        m_UIManager.textCountdown.text = " GO! ";
+        CmdCanStartCar();
+        yield return new WaitForSeconds(waitTime);
+        m_UIManager.textCountdown.text = " ";
+    }
+
     /// <summary>
     /// Called when the local player object has been set up.
     /// <para>This happens after OnStartClient(), as it is triggered by an ownership message from the server. This is an appropriate place to activate components or functionality that should only be active for the local player, such as cameras and input.</para>
@@ -77,7 +91,7 @@ public class SetupPlayer : NetworkBehaviour
         CmdNumPlayers();
         if (m_PolePositionManager.numPlayers > 0)
         {
-            CmdCanStartCar();
+            StartCoroutine(Countdown(1.0f));            
         }
     }
 

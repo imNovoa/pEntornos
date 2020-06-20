@@ -779,6 +779,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Button_Disconnect
       objectReference: {fileID: 0}
+    - target: {fileID: 654311509478738105, guid: 5c339809502a33749b546f6663bcfb75,
+        type: 3}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 654311509478738105, guid: 5c339809502a33749b546f6663bcfb75,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 654311509478738105, guid: 5c339809502a33749b546f6663bcfb75,
+        type: 3}
+      propertyPath: m_FontData.m_MaxSize
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 1268040460409379284, guid: 5c339809502a33749b546f6663bcfb75,
+        type: 3}
+      propertyPath: m_Name
+      value: Text_Countdown
+      objectReference: {fileID: 0}
     - target: {fileID: 1312036195046881181, guid: 5c339809502a33749b546f6663bcfb75,
         type: 3}
       propertyPath: m_Name
@@ -890,6 +910,21 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 5155852799188650074, guid: 5c339809502a33749b546f6663bcfb75,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 5155852799188650074, guid: 5c339809502a33749b546f6663bcfb75,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 5155852799188650074, guid: 5c339809502a33749b546f6663bcfb75,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 6289044172019694377, guid: 5c339809502a33749b546f6663bcfb75,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -950,6 +985,11 @@ PrefabInstance:
       propertyPath: buttontest
       value: 
       objectReference: {fileID: 1806844488}
+    - target: {fileID: 6415909394017212768, guid: 5c339809502a33749b546f6663bcfb75,
+        type: 3}
+      propertyPath: textCountdown
+      value: 
+      objectReference: {fileID: 6415909393553272846}
     - target: {fileID: 6415909394017212769, guid: 5c339809502a33749b546f6663bcfb75,
         type: 3}
       propertyPath: m_Name
@@ -1013,7 +1053,7 @@ PrefabInstance:
     - target: {fileID: 6415909394322138283, guid: 5c339809502a33749b546f6663bcfb75,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6415909394493063714, guid: 5c339809502a33749b546f6663bcfb75,
         type: 3}
@@ -1023,7 +1063,7 @@ PrefabInstance:
     - target: {fileID: 6415909394707280194, guid: 5c339809502a33749b546f6663bcfb75,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6724989810218384198, guid: 5c339809502a33749b546f6663bcfb75,
         type: 3}
@@ -1130,6 +1170,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 6415909393553272841}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6415909393553272846 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 654311509478738105, guid: 5c339809502a33749b546f6663bcfb75,
+    type: 3}
+  m_PrefabInstance: {fileID: 6415909393553272841}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &9126478172555348644 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3251817754351065421, guid: 2356b61abd7af864eadff2e62f8c8586,
