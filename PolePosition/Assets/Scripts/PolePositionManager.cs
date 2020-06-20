@@ -64,6 +64,12 @@ public class PolePositionManager : NetworkBehaviour
         numPlayers++;
     }
 
+    public void DeletePlayer(PlayerInfo player)
+    {
+        m_Players.Remove(player);
+        numPlayers--;
+    }
+
     public void AllStartTrue()
     {
         foreach (var item in m_Players)

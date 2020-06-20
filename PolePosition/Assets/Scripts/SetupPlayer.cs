@@ -67,6 +67,14 @@ public class SetupPlayer : NetworkBehaviour
 
     }
 
+
+
+    public override void OnStopClient()
+    {
+        base.OnStopClient();
+        m_PolePositionManager.DeletePlayer(m_PlayerInfo);
+    }
+
     private IEnumerator Countdown(float waitTime)
     {
         for (int i = 3; i > 0; i--)
