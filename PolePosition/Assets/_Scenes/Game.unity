@@ -589,6 +589,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2692902326429762209, guid: 2356b61abd7af864eadff2e62f8c8586,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2742787511526071709, guid: 2356b61abd7af864eadff2e62f8c8586,
         type: 3}
       propertyPath: m_IsTrigger
@@ -608,6 +613,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Circuit
+      objectReference: {fileID: 0}
+    - target: {fileID: 3251817754351065410, guid: 2356b61abd7af864eadff2e62f8c8586,
+        type: 3}
+      propertyPath: m_Positions.Array.data[0].x
+      value: -60
+      objectReference: {fileID: 0}
+    - target: {fileID: 3251817754351065410, guid: 2356b61abd7af864eadff2e62f8c8586,
+        type: 3}
+      propertyPath: m_Positions.Array.data[24].x
+      value: -60
       objectReference: {fileID: 0}
     - target: {fileID: 3251817754351065411, guid: 2356b61abd7af864eadff2e62f8c8586,
         type: 3}
@@ -690,6 +705,11 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6879681060154054441, guid: 2356b61abd7af864eadff2e62f8c8586,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7069323969977072056, guid: 2356b61abd7af864eadff2e62f8c8586,
         type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -1139,7 +1159,7 @@ PrefabInstance:
     - target: {fileID: 7401610074429141351, guid: 5c339809502a33749b546f6663bcfb75,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -300.72
+      value: -250
       objectReference: {fileID: 0}
     - target: {fileID: 8057899918312642047, guid: 5c339809502a33749b546f6663bcfb75,
         type: 3}

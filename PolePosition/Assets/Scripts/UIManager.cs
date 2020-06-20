@@ -26,7 +26,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] public Text playersReady;
 
     [Header("Score Room")] [SerializeField] private GameObject scoreRoom;
-    //[SerializeField] public Button buttonDisconnect;
     [SerializeField] private Button buttontest;
     [SerializeField] private Text score;
 
@@ -49,7 +48,7 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         inputFieldIP.text = "localhost";
-        buttonHost.onClick.AddListener(() => StartHost());
+        buttonHost.onClick.AddListener(() => StartHost());          //LLama a las funciones que activan el lobby de cada usuario
         buttonClient.onClick.AddListener(() => StartClient());
         buttonServer.onClick.AddListener(() => StartServer());
         ActivateMainMenu();
@@ -60,12 +59,12 @@ public class UIManager : MonoBehaviour
         textSpeed.text = "Speed " + speed + " Km/h";
     }
 
-    public void UpdatePlayers(int players)
+    public void UpdatePlayers(int players)  //Actualiza el texto "players connected: " del lobbyRoom
     {
         playersReady.text = "Players connected: " + players;
     }
 
-    public void ShowScore(String jug, float t)
+    public void ShowScore(String jug, float t)      //Actualiza la tabla de puntuación dentro de la interfaz de ScoreRoom
     {
         score.text += nextPos + "º " + jug + "   :       " + t + " seg \n";
         nextPos++;
@@ -76,26 +75,26 @@ public class UIManager : MonoBehaviour
         buttonReady.enabled = false;
         buttonReturn.enabled = false;
     }
-    public void GoToScore()
+
+    public void GoToScore()         //Activa la interfaz de puntuaciones
     { 
         buttontest.onClick.AddListener(() => ActivateMainMenu());
         buttontest.onClick.AddListener(() => m_NetworkManager.StopClient());
-        //buttontest.onClick.AddListener(() => prueba());
         mainMenu.SetActive(false);
         inGameHUD.SetActive(false);
         lobbyRoom.SetActive(false);
         scoreRoom.SetActive(true);
     }
 
-    public void PlayerEnded()
+    /*public void PlayerEnded()   
     {
         EndingMessage.enabled = true;
         textSpeed.enabled = false;
         textLaps.enabled = false;
         textPosition.enabled = false;
-    }
+    }*/
 
-    private void ActivateMainMenu()
+    private void ActivateMainMenu()     //Activa interfaz del menu principal
     {
         buttonReady.enabled = true;
         buttonReturn.enabled = true;
@@ -105,7 +104,7 @@ public class UIManager : MonoBehaviour
         scoreRoom.SetActive(false);
     }
 
-    private void ReturnToMenu()
+    private void ReturnToMenu()     
     {
         buttonReady.onClick.RemoveAllListeners();
         mainMenu.SetActive(true);
@@ -114,7 +113,7 @@ public class UIManager : MonoBehaviour
         scoreRoom.SetActive(false);
     }
 
-    private void ActivateLobbyRoomHost()
+    private void ActivateLobbyRoomHost()        //Activa el lobby del host
     {
         buttonReady.onClick.AddListener(() => ActivateInGameHUD());
         buttonReady.onClick.AddListener(() => m_NetworkManager.StartHost());
@@ -127,7 +126,7 @@ public class UIManager : MonoBehaviour
         scoreRoom.SetActive(false);
     }
 
-    private void ActivateLobbyRoomClient()
+    private void ActivateLobbyRoomClient()      //Activa el lobby del cliente
     {
         buttonReady.onClick.AddListener(() => ActivateInGameHUD());
         buttonReady.onClick.AddListener(() => m_NetworkManager.StartClient());
@@ -140,7 +139,7 @@ public class UIManager : MonoBehaviour
         scoreRoom.SetActive(false);
     }
 
-    private void ActivateLobbyRoomServer()
+    private void ActivateLobbyRoomServer()      //Activa el lobby del sRoomServer
     {
         buttonReady.onClick.AddListener(() => ActivateInGameHUD());
         buttonReady.onClick.AddListener(() => m_NetworkManager.StartServer());
@@ -153,7 +152,7 @@ public class UIManager : MonoBehaviour
         scoreRoom.SetActive(false);
     }
 
-    public void ActivateInGameHUD()
+    public void ActivateInGameHUD()             //Activa la interfaz ingame
     {
         mainMenu.SetActive(false);
         lobbyRoom.SetActive(false);

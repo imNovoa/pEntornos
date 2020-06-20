@@ -16,8 +16,7 @@ public class PlayerInfo : MonoBehaviour
     public int CurrentLap { get; set; }
 
     public float raceTime { get; set; }
-
-    //public bool StartCar = false; //{ get; set; }
+    
     public bool StartCar { get; set; }
 
     public bool CanWin = true;

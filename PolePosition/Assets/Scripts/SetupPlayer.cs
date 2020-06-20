@@ -14,7 +14,6 @@ public class SetupPlayer : NetworkBehaviour
     [SyncVar] private int m_ID;
     [SyncVar] private string m_Name;
     [SyncVar] private Color m_Color;
-    //[SyncVar] private int m_playersReady;
 
     //Waypoints variables
     private int currentWaypoint = 0;
@@ -67,8 +66,7 @@ public class SetupPlayer : NetworkBehaviour
 
     }
 
-
-
+    //Se llama al desconectar un cliente.
     public override void OnStopClient()
     {
         base.OnStopClient();
@@ -76,7 +74,7 @@ public class SetupPlayer : NetworkBehaviour
         m_UIManager.playersReady.text = "Players ready: " + m_PolePositionManager.numPlayers;
     }
 
-    private IEnumerator Countdown(float waitTime)
+    private IEnumerator Countdown(float waitTime) //Controla y sincroniza la cuenta atrás de salida, y el inicio del movimiento de los coches.
     {
         String txt = " ";
         for (int i = 3; i > 0; i--)
@@ -102,7 +100,7 @@ public class SetupPlayer : NetworkBehaviour
         CmdProvideName(m_UIManager.insertName.text);
         CmdProvideColor(m_UIManager.InputColor.value);
         CmdNumPlayers();
-        if (m_PolePositionManager.numPlayers > 1)
+        if (m_PolePositionManager.numPlayers > 1)   //Empieza la cuenta atrás si el numero de jugadores en sala es suficiente
         {
             StartCoroutine(Countdown(1.0f));            
         }
@@ -123,7 +121,6 @@ public class SetupPlayer : NetworkBehaviour
     [Command]
     void CmdNumPlayers()
     {
-        //Debug.Log("m_playersReady CMD" + m_playersReady);
         RpcNumPlayers();
     }
 
@@ -149,21 +146,20 @@ public class SetupPlayer : NetworkBehaviour
     }
 
     [ClientRpc]
-    void RpcClientCountdown(String str)
+    void RpcClientCountdown(String str) //Actualiza el texto de la cuenta atrás
     {
         m_UIManager.textCountdown.text = str;
     }
 
     [ClientRpc]
-    void RpcPlayerName(string name)
+    void RpcPlayerName(string name)     //Actualiza los nombres de los jugadores
     {        
         m_PlayerInfo.Name = name;
         m_UIManager.textPosition.text += name + "\n";
-        //CmdUpdateUI();
     }
 
     [ClientRpc]
-    void RpcPlayerColor(int colorId)
+    void RpcPlayerColor(int colorId)    //Actualiza los colores de los jugadores
     {
         m_PlayerInfo.Color = PLAYER_COLORS[colorId];
         GetComponentInChildren<Renderer>().materials[1].color = PLAYER_COLORS[colorId];
@@ -176,14 +172,13 @@ public class SetupPlayer : NetworkBehaviour
     }
 
     [ClientRpc]
-    void RpcNumPlayers()
+    void RpcNumPlayers()                //Actualiza el mensaje que indica los jugadores conectados
     {
         m_UIManager.playersReady.text = "Players ready: " + m_PolePositionManager.numPlayers;
         if (m_PolePositionManager.numPlayers > 1)
         {
             m_UIManager.ActivateInGameHUD();
         }
-        //Debug.Log("m_playersReady RPC" + m_playersReady);
     }
 
     [ClientRpc]
@@ -208,16 +203,17 @@ public class SetupPlayer : NetworkBehaviour
     {
         if (isLocalPlayer)
         {
+            //Calcula la distancia al siguiente Waypoint
             Vector3 waypointPos = m_PolePositionManager.getCurrentWaypoint(currentWaypoint);
             Vector3 actualPos = m_PolePositionManager.SpherePosition(m_PlayerInfo.CurrentPosition);
             oldDis = Vector3.Distance(waypointPos, actualPos);
+
             m_PlayerController.enabled = true;
             m_PlayerController.OnSpeedChangeEvent += OnSpeedChangeEventHandler;
             ConfigureCamera();
         }
     }
-
-
+    
     void OnSpeedChangeEventHandler(float speed)
     {
         m_UIManager.UpdateSpeed((int)speed * 5); // 5 for visualization purpose (km/h)
@@ -228,9 +224,8 @@ public class SetupPlayer : NetworkBehaviour
         if (Camera.main != null) Camera.main.gameObject.GetComponent<CameraController>().m_Focus = this.gameObject;
     }
 
-    void UpdatePosition()
+    void UpdatePosition()       //Recoloca al jugador en el circuito si está inactivo
     {
-        
         if (m_PlayerController.checkProblems())
         {
             Quaternion rot = new Quaternion(0, m_PlayerInfo.transform.rotation.y, 0, m_PlayerInfo.transform.rotation.w);
@@ -241,7 +236,7 @@ public class SetupPlayer : NetworkBehaviour
         }
     }
 
-    void CheckPath()
+    void CheckPath()            //Comprueba si se recorre correctamente el circuito y avisa al jugador
     {
         Vector3 waypointPos = m_PolePositionManager.getCurrentWaypoint(currentWaypoint);
         Vector3 actualPos = m_PolePositionManager.SpherePosition(m_PlayerInfo.CurrentPosition);
@@ -268,7 +263,7 @@ public class SetupPlayer : NetworkBehaviour
         oldDis = newDis;
     }
 
-    public String EndChecker()
+    public String EndChecker()  //Detecta si el jugador ha realizado la última vuelta, devolviendo su nombre
     {
         if (m_PlayerInfo.CurrentLap > 0 && m_PlayerInfo.CanWin)
         {
@@ -286,7 +281,7 @@ public class SetupPlayer : NetworkBehaviour
             m_UIManager.textPosition.text = m_PolePositionManager.UpdateUI();
 
             String NameFinish = EndChecker();
-            if (NameFinish != "-1")
+            if (NameFinish != "-1")         //Si se devuelve un nombre, actualiza la tabla de puntuaciones
             {
                 //m_PlayerController.enabled = false;                
                 CmdUpdateScore(NameFinish, m_PlayerController.time);

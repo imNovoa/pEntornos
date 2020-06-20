@@ -14,7 +14,7 @@ public class PolePositionManager : NetworkBehaviour
     private CircuitController m_CircuitController;
     private GameObject[] m_DebuggingSpheres;
 
-    private GameObject[] m_Checkpoints = new GameObject[8];
+    private GameObject[] m_Checkpoints = new GameObject[8];     //Puntos de control para comprobar el sentido del coche
 
     private void Awake()
     {
@@ -28,7 +28,7 @@ public class PolePositionManager : NetworkBehaviour
             m_DebuggingSpheres[i].GetComponent<SphereCollider>().enabled = false;
         }
 
-        m_Checkpoints[0] = GameObject.Find("Waypoint 0");
+        m_Checkpoints[0] = GameObject.Find("Waypoint 0");       //Accede a los Waypoints dentro de Unity
         m_Checkpoints[1] = GameObject.Find("Waypoint 1");
         m_Checkpoints[2] = GameObject.Find("Waypoint 2");
         m_Checkpoints[3] = GameObject.Find("Waypoint 3");
@@ -46,16 +46,15 @@ public class PolePositionManager : NetworkBehaviour
         UpdateRaceProgress();
     }
 
-    public Vector3 SpherePosition(int ID)
+    public Vector3 SpherePosition(int ID)           //Devuelve la posición de la esfera solicitada
     {
         return m_DebuggingSpheres[ID].transform.position;
     }
 
-    public Vector3 getCurrentWaypoint(int ID)
+    public Vector3 getCurrentWaypoint(int ID)       //Devuelve el waypoint solicitado
     {
         return m_Checkpoints[ID].transform.position;
     }
-
 
     public void AddPlayer(PlayerInfo player)
     {
@@ -70,7 +69,7 @@ public class PolePositionManager : NetworkBehaviour
         numPlayers--;
     }
 
-    public void AllStartTrue()
+    public void AllStartTrue()                      //Activa el movimiento para los jugadores
     {
         foreach (var item in m_Players)
         {
@@ -78,7 +77,7 @@ public class PolePositionManager : NetworkBehaviour
         }
     }
 
-    private class PlayerInfoComparer : Comparer<PlayerInfo>
+    private class PlayerInfoComparer : Comparer<PlayerInfo> 
     {
         float[] m_ArcLengths;
 
@@ -117,11 +116,9 @@ public class PolePositionManager : NetworkBehaviour
         {
             myRaceOrder += _player.Name + " " + _player.CurrentPosition + " " + _player.ID;
         }
-
-        //Debug.Log("El orden de carrera es: " + myRaceOrder);
     }
 
-    public string UpdateUI()
+    public string UpdateUI()        //Devuelve un string ordenado de la lista de jugadores
     {
         string UpdatedPositions = "";
         foreach (var _player in m_Players)
@@ -131,7 +128,7 @@ public class PolePositionManager : NetworkBehaviour
         return UpdatedPositions;
     }
 
-    float ComputeCarArcLength(int ID)
+    float ComputeCarArcLength(int ID)   
     {
         // Compute the projection of the car position to the closest circuit 
         // path segment and accumulate the arc-length along of the car along

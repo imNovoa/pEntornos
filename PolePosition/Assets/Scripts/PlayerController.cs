@@ -82,11 +82,11 @@ public class PlayerController : NetworkBehaviour
     {
         m_Rigidbody = GetComponent<Rigidbody>();
         m_PlayerInfo = GetComponent<PlayerInfo>();
-        m_afk.Elapsed += colocarCoche;
+        m_afk.Elapsed += colocarCoche;          //Comprueba si el coche necesita recolocarse
         startTime = Time.time;
     }
 
-    public void colocarCoche(object source, System.Timers.ElapsedEventArgs e)
+    public void colocarCoche(object source, System.Timers.ElapsedEventArgs e)       //Devuelve true si el coche está atascado
     {
         m_afk.Stop();
         cocheAtascado = true;
@@ -94,21 +94,20 @@ public class PlayerController : NetworkBehaviour
 
     public void Update()
     {
-        if (m_PlayerInfo.StartCar)
+        if (m_PlayerInfo.StartCar)              //Comprueba si el coche puede moverse
         {
             InputAcceleration = Input.GetAxis("Vertical");
             InputSteering = Input.GetAxis(("Horizontal"));
             InputBrake = Input.GetAxis("Jump");
             Speed = m_Rigidbody.velocity.magnitude;
         }
-
-        if (m_CurrentSpeed > 1 || m_CurrentSpeed < -1)
+        if (m_CurrentSpeed > 1 || m_CurrentSpeed < -1)      //Si el coche se mueve, detiene el temporizador
         {
             //Debug.Log("Moviendose " + m_onMovement);
             m_onMovement = true;
             m_afk.Stop();
         }
-        if (m_CurrentSpeed > -1 && m_CurrentSpeed < 1 && m_onMovement == true)
+        if (m_CurrentSpeed > -1 && m_CurrentSpeed < 1 && m_onMovement == true)  //Si el coche está parado, activa el temporizador
         {
             m_afk.Start();
             //Debug.Log("Parado " + m_onMovement);
@@ -119,7 +118,7 @@ public class PlayerController : NetworkBehaviour
 
     public void FixedUpdate()
     {
-        if (m_PlayerInfo.StartCar)
+        if (m_PlayerInfo.StartCar)                                          //Comprueba que el coche puede moverse
         {
             InputSteering = Mathf.Clamp(InputSteering, -1, 1);
             InputAcceleration = Mathf.Clamp(InputAcceleration, -1, 1);
@@ -171,8 +170,6 @@ public class PlayerController : NetworkBehaviour
                 ApplyLocalPositionToVisuals(axleInfo.leftWheel);
                 ApplyLocalPositionToVisuals(axleInfo.rightWheel);
             }
-            Debug.Log("Vueltas: " + m_PlayerInfo.CurrentLap);
-            Debug.Log("Vuelta Correcta: " + vueltaCorrecta);
             SteerHelper();
             SpeedLimiter();
             AddDownForce();
@@ -180,7 +177,7 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
-    public void OnTriggerEnter(Collider col)
+    public void OnTriggerEnter(Collider col)            //Detecta las vueltas y las cuenta
     {
         if (col.gameObject.name == "controlPoint")
         {
@@ -225,7 +222,7 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
-// this is used to add more grip in relation to speed
+    // this is used to add more grip in relation to speed
     private void AddDownForce()
     {
         foreach (var axleInfo in axleInfos)
@@ -242,8 +239,8 @@ public class PlayerController : NetworkBehaviour
             m_Rigidbody.velocity = topSpeed * m_Rigidbody.velocity.normalized;
     }
 
-// finds the corresponding visual wheel
-// correctly applies the transform
+    // finds the corresponding visual wheel
+    // correctly applies the transform
     public void ApplyLocalPositionToVisuals(WheelCollider col)
     {
         if (col.transform.childCount == 0)

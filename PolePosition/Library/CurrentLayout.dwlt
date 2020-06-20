@@ -43,8 +43,8 @@ MonoBehaviour:
     y: 499
     width: 1018
     height: 232
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 102, y: 124}
+  m_MaxSize: {x: 4002, y: 4024}
   m_ActualView: {fileID: 19}
   m_Panes:
   - {fileID: 19}
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_MinSize: {x: 102, y: 248}
   m_MaxSize: {x: 4002, y: 8048}
   vertical: 1
-  controlID: 131
+  controlID: 97
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -153,7 +153,7 @@ MonoBehaviour:
   m_MinSize: {x: 234, y: 498}
   m_MaxSize: {x: 10004, y: 14048}
   vertical: 1
-  controlID: 75
+  controlID: 117
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -205,7 +205,7 @@ MonoBehaviour:
   m_MinSize: {x: 613, y: 498}
   m_MaxSize: {x: 18008, y: 14048}
   vertical: 0
-  controlID: 74
+  controlID: 116
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -225,8 +225,8 @@ MonoBehaviour:
     y: 0
     width: 282
     height: 731
-  m_MinSize: {x: 277, y: 74}
-  m_MaxSize: {x: 4002, y: 4024}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
@@ -455,7 +455,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: ac300000
     m_LastClickedID: 12460
-    m_ExpandedIDs: 00000000ee2200007e280000e62a0000362b00001c2c0000242c0000762c0000ce2d0000422e00006e2e00009e2e00002e300000c43000008e3100006e3d0000143e000028410000fa410000de550000e0550000e2550000e4550000e6550000e8550000
+    m_ExpandedIDs: 00000000ee2200006c280000d42a0000242b00000a2c0000122c0000642c0000bc2d0000302e00005c2e00008c2e00001c300000b23000007c3100005c3d0000023e0000fa3e000016410000e8410000c6550000c8550000ca550000cc550000ce550000d0550000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -480,10 +480,10 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_AssetTreeState:
-    scrollPos: {x: 0, y: 0}
+    scrollPos: {x: 0, y: 195}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff00000000ee2200007e280000e62a0000362b00001c2c0000242c0000762c0000ce2d0000422e00006e2e00009e2e00002e300000c43000008e3100006e3d0000143e00000c3f000028410000fa410000de550000e0550000e2550000e4550000e6550000e8550000
+    m_ExpandedIDs: ffffffff00000000ee2200006c280000d42a0000242b00000a2c0000122c0000642c0000bc2d0000302e00005c2e00008c2e00001c300000b23000007c3100005c3d0000023e0000fa3e000016410000e8410000c6550000c8550000ca550000cc550000ce550000d0550000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: UIManager
@@ -602,23 +602,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 56fd0000
-      m_LastClickedID: 64854
-      m_ExpandedIDs: aad6ffffc6d6ffff66d8ffffc4e3ffffe0e3ffff80e5ffffa8e7ffffc4e7ffff64e9ffff14ecffff30ecffffd0edffff98f0ffffb4f0ffff58f2ffffb4f5ffff1af6ffffd4fbffff704b00001ecd0000cecf000058d4000048fa000054fc0000f0fc000056fd000090fe000070010100
+      m_SelectedIDs: dcfbffff
+      m_LastClickedID: -1060
+      m_ExpandedIDs: 6cf0ffff88f0ffff2cf2ffffdcfbffff9e690000b26e0000566f0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: Circuit
+        m_OriginalName: Circuit
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: 28502
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 5}
       m_SearchString: 
