@@ -73,19 +73,24 @@ public class SetupPlayer : NetworkBehaviour
     {
         base.OnStopClient();
         m_PolePositionManager.DeletePlayer(m_PlayerInfo);
+        m_UIManager.playersReady.text = "Players ready: " + m_PolePositionManager.numPlayers;
     }
 
     private IEnumerator Countdown(float waitTime)
     {
+        String txt = " ";
         for (int i = 3; i > 0; i--)
         {
-            m_UIManager.textCountdown.text = " " + i + " ";
+            txt = " " + i + " ";
+            CmdClientCountdown(txt);
             yield return new WaitForSeconds(waitTime);
         }
-        m_UIManager.textCountdown.text = " GO! ";
+        txt = " GO! ";
+        CmdClientCountdown(txt);
         CmdCanStartCar();
         yield return new WaitForSeconds(waitTime);
-        m_UIManager.textCountdown.text = " ";
+        txt = "  ";
+        CmdClientCountdown(txt);
     }
 
     /// <summary>
@@ -97,10 +102,16 @@ public class SetupPlayer : NetworkBehaviour
         CmdProvideName(m_UIManager.insertName.text);
         CmdProvideColor(m_UIManager.InputColor.value);
         CmdNumPlayers();
-        if (m_PolePositionManager.numPlayers > 0)
+        if (m_PolePositionManager.numPlayers > 1)
         {
             StartCoroutine(Countdown(1.0f));            
         }
+    }
+
+    [Command]
+    void CmdClientCountdown(String str)
+    {
+        RpcClientCountdown(str);
     }
 
     [Command]
@@ -138,6 +149,12 @@ public class SetupPlayer : NetworkBehaviour
     }
 
     [ClientRpc]
+    void RpcClientCountdown(String str)
+    {
+        m_UIManager.textCountdown.text = str;
+    }
+
+    [ClientRpc]
     void RpcPlayerName(string name)
     {        
         m_PlayerInfo.Name = name;
@@ -162,7 +179,7 @@ public class SetupPlayer : NetworkBehaviour
     void RpcNumPlayers()
     {
         m_UIManager.playersReady.text = "Players ready: " + m_PolePositionManager.numPlayers;
-        if (m_PolePositionManager.numPlayers > 0)
+        if (m_PolePositionManager.numPlayers > 1)
         {
             m_UIManager.ActivateInGameHUD();
         }

@@ -26,7 +26,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] public Text playersReady;
 
     [Header("Score Room")] [SerializeField] private GameObject scoreRoom;
-    [SerializeField] public Button buttonDisconnect;
+    //[SerializeField] public Button buttonDisconnect;
     [SerializeField] private Button buttontest;
     [SerializeField] private Text score;
 
@@ -78,7 +78,7 @@ public class UIManager : MonoBehaviour
     }
     public void GoToScore()
     { 
-        buttontest.onClick.AddListener(() => ReturnToMenu());
+        buttontest.onClick.AddListener(() => ActivateMainMenu());
         buttontest.onClick.AddListener(() => m_NetworkManager.StopClient());
         //buttontest.onClick.AddListener(() => prueba());
         mainMenu.SetActive(false);
@@ -97,6 +97,8 @@ public class UIManager : MonoBehaviour
 
     private void ActivateMainMenu()
     {
+        buttonReady.enabled = true;
+        buttonReturn.enabled = true;
         mainMenu.SetActive(true);
         inGameHUD.SetActive(false);
         lobbyRoom.SetActive(false);
