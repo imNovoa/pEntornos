@@ -17,7 +17,8 @@ public class PlayerInfo : MonoBehaviour
 
     public float raceTime { get; set; }
 
-    public bool StartCar = false; //{ get; set; }
+    //public bool StartCar = false; //{ get; set; }
+    public bool StartCar { get; set; }
 
     public bool CanWin = true;
 
