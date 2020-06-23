@@ -100,7 +100,7 @@ public class SetupPlayer : NetworkBehaviour
         CmdProvideName(m_UIManager.insertName.text);
         CmdProvideColor(m_UIManager.InputColor.value);
         CmdNumPlayers();
-        if (m_PolePositionManager.numPlayers > 1)   //Empieza la cuenta atrás si el numero de jugadores en sala es suficiente
+        if (m_PolePositionManager.numPlayers > 3)   //Empieza la cuenta atrás si el numero de jugadores en sala es suficiente
         {
             StartCoroutine(Countdown(1.0f));            
         }
@@ -265,7 +265,7 @@ public class SetupPlayer : NetworkBehaviour
 
     public String EndChecker()  //Detecta si el jugador ha realizado la última vuelta, devolviendo su nombre
     {
-        if (m_PlayerInfo.CurrentLap > 0 && m_PlayerInfo.CanWin)
+        if (m_PlayerInfo.CurrentLap > 2 && m_PlayerInfo.CanWin)
         {
             m_PlayerInfo.CanWin = false;
             m_UIManager.GoToScore();

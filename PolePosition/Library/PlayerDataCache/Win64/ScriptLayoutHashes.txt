@@ -1,6 +1,6 @@
 Win64
 PlayerPath?
-C:/Users/Admin/Documents/GitHub/pEntornos/PolePosition/Build/RacingProto.exe
+D:/Entornos/def/pEntornos/PolePosition/Build/RacingProto.exe
 SceneListBegin?
 Assets/_Scenes/Game.unity
 SceneListEnd?
